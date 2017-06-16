@@ -1,0 +1,29 @@
+<%= form_for(recipe) do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :portion %>
+    <%= f.number_field :portion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last %>
+    <%= f.date_select :last %>
+  </div>
+
+  <div class="field">
+    <%= f.file_field :picture, accept: 'image/jpeg', multiple: false %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
