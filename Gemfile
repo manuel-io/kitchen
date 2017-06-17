@@ -5,12 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails_12factor', group: :production
-
 gem 'redcarpet'
 gem 'mini_magick'
-gem 'monban'
-gem 'monban-generators'
 gem 'rails-i18n'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -59,4 +55,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.3.1'
+ruby '2.4.1'

@@ -39,7 +39,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
     coffee-rails (4.2.1)
@@ -78,12 +77,6 @@ GEM
     mini_magick (4.6.1)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    monban (1.1.0)
-      bcrypt
-      rails
-      warden
-    monban-generators (0.0.5)
-      monban (>= 0.0.12)
     multi_json (1.12.1)
     nio4r (2.0.0)
     nokogiri (1.7.0.1)
@@ -113,11 +106,6 @@ GEM
     rails-i18n (5.0.3)
       i18n (~> 0.7)
       railties (~> 5.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (5.0.2)
       actionpack (= 5.0.2)
       activesupport (= 5.0.2)
@@ -158,8 +146,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.1.7)
       execjs (>= 0.3.0, < 3)
-    warden (1.2.7)
-      rack (>= 1.0)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -179,13 +165,10 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   mini_magick
-  monban
-  monban-generators
   pg
   puma (~> 3.0)
   rails (~> 5.0.2)
   rails-i18n
-  rails_12factor
   redcarpet
   sass-rails (~> 5.0)
   spring
