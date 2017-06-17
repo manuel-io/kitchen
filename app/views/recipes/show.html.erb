@@ -1,0 +1,48 @@
+<nav>
+  <%= link_to 'Back', recipes_path %> |
+  <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+  <%= link_to 'Add', new_recipe_path %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+
+  <section>
+    <%= image_tag url_for(controller: "recipes", action: "show_picture", id: @recipe.id) %>
+  </section>
+  
+  <% @recipe.components.order(title: :asc).each do |component| %>
+  <section>
+    <h3><%= component.title %></h3>
+    <table>
+    <% component.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.amount %> <%= ingredient.unit %></td>
+        <td><%= ingredient.name %></td>
+      </tr>
+    <% end %>
+    </table>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2 class='recipe'><%= @recipe.title %></h2>
+  <p><strong>Last:</strong><%= @recipe.last %></p>
+  <p><strong>Serves:</strong><%= @recipe.portion %> Persons</p>
+  <p id='description'><%= @recipe.description %></p>
+  <% @recipe.components.order(title: :asc).each do |component| %>
+    <h3><%= component.title  %></h3>
+    <p><%= markdown(component.description) %></p>
+  <% end %>
+
+  <h3>Quellen</h3>
+  <% @recipe.sources.each do |source| %>
+    <p><a href='<%= source.url %>'><%= source.name %></a></p>
+  <% end %>
+</article>
+

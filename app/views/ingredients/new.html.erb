@@ -1,0 +1,22 @@
+<nav>
+  <h3><%= @ingredient.component.recipe.title %></h3>
+  <h4><%= @ingredient.component.title %></h4>
+  <%= link_to 'Back', @component %>
+</nav>
+
+<aside>
+  <% if @ingredient.errors.any? %>
+  <section class='error'>
+    <% @ingredient.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>New Ingredient</h2>
+  <%= render 'form', ingredient: @ingredient %>
+</article>
+
+

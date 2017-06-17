@@ -1,0 +1,20 @@
+<nav>
+  <%= link_to 'Back', recipes_path %>
+</nav>
+
+<aside>
+  <% if @recipe.errors.any? %>
+  <section class='error'>
+    <% @recipe.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+      </ul>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>New Recipe</h2>
+  <%= render 'form', recipe: @recipe %>
+</article>
+

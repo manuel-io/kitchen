@@ -1,0 +1,20 @@
+default: &default
+  host: weatherstation
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: kitchen
+  password: qwdghf23qw
+
+development:
+  <<: *default
+  database: kitchen_development
+
+test:
+  <<: *default
+  database: kitchen_test
+
+production:
+  <<: *default
+  database: kitchen_production
+

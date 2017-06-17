@@ -1,0 +1,32 @@
+<nav>
+  <h3><%= @component.recipe.title %></h3>
+  <h4><%= @component.title %></h4>
+  <%= link_to 'Back', components_path %> |
+  <%= link_to 'Edit', edit_component_path(@component) %> |
+  <%= link_to 'Add', new_component_ingredient_path(@component) %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>Ingredients</h2>
+  <section>
+    <table>
+      <% @component.ingredients.order(unit: :desc, amount: :asc).each do |value| %>
+      <tr>
+        <td><%= value.amount %></td>
+        <td><%= value.unit %></td>
+        <td><%= value.name %></td>
+        <td><%= link_to 'Edit', edit_component_ingredient_path(@component, value) %></td>
+        <td><%= link_to 'Destroy', component_ingredient_path(@component, value), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+  </table>
+  </section>
+</article>

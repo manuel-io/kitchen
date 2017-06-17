@@ -1,0 +1,22 @@
+<%= form_for([@component, @ingredient]) do |f| %>
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.number_field :amount, step: 0.125 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit %>
+    <%= f.text_field :unit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+<!--  <div class="field :component_id">
+-->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+
+<article>
+<%= form_for @user, url: admin_users_path do |form| %>
+
+  <% if @user.errors.any? %>
+    <%= pluralize(@user.errors.count, "error") %> prevented your account from being created:
+    <ul>
+      <% @user.errors.full_messages.each do |error_message| %>
+        <li><%= error_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, require: true %>
+  </div>
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password, require: true %>
+  </div>
+  <div>
+    <%= form.submit "Sign up" %>
+  </div>
+<% end %>
+</article>

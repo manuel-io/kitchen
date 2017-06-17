@@ -1,0 +1,26 @@
+<nav>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>List</h2>
+  <% @recipes.each do |value| %>
+  <% if value.sources.length > 0 %>
+    <h3 class='recipe'><%= value.title %></h3>
+    <% value.sources[0...-1].each do |source| %>
+      <a href='<%= source.url %>'><%= source.name %></a>,
+    <% end %>
+    <% if source = value.sources.last %>
+      <a href='<%= source.url %>'><%= source.name %></a>
+    <% end %>
+  <% end %>
+  <% end %>
+</article>
+

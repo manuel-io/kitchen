@@ -1,0 +1,260 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  background-image: url("background.png");
+  background-repeat: repeat;
+}
+
+body > header {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 0px;
+  border: 2px solid #000;
+  background-color: #d19d5b;
+  text-align: center;
+  grid-area: head;
+}
+
+body > #container  {
+  display: grid;
+  justify-items: start;
+  align-items: start;
+  background-image: url("book-section.png");
+  background-repeat: repeat-y;
+  border-top: 2px solid #000;
+  padding-top: 20px;
+}
+
+body > footer {
+  background-image: url("book-footer.png");
+  background-repeat: no-repeat;
+  height: 74px;
+  grid-area: foot;
+}
+
+nav {
+  grid-area: nav;
+}
+
+aside {
+  width: calc(100% - 40px);
+  border: 0px solid #000;
+  grid-area: aside;
+}
+
+article {
+  width: calc(100% - 40px);
+  padding: 20px;
+  min-height: 300px;
+  border: 0px solid #000;
+  grid-area: article;
+}
+
+#dish {
+  position: absolute;
+  width: 235px;
+  height: 235px;
+  top: -100px;
+  left: -30px;
+  background-image: url("dish.png");
+  background-repeat: no-repeat;
+}
+
+#fork {
+  position: absolute;
+  width: 160px;
+  height: 300px;
+  top: 180px;
+  left: 880px;
+  background-image: url("fork.png");
+  background-repeat: no-repeat;
+}
+
+#oneway {
+  position: absolute;
+  width: 100px;
+  height: 133px;
+  background-image: url("oneway.png");
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 0px) {
+  body > header {
+    width: 360px - 2px;
+    ul { padding-right: 105px; }
+  }
+
+  body > #container  {
+    grid-template-columns: 360px;
+    grid-template-rows: 0em 0em auto 1fr 0em; 
+    grid-template-areas: "head" "nav" "aside" "article" "foot";
+    width: 360px;
+  }
+
+  body > footer {
+    width: 360px;
+  }
+
+  aside {
+    padding: 0px;
+  }
+
+  #oneway {
+    top: 80px;
+    left: 360px - 100px;
+  }
+
+  #kitcat { display: block; }
+  #dish { display: none; }
+  #fork { display: none; }
+}
+
+@media screen and (min-width: 1000px) {
+  body > header {
+    width: 185px + 195px + 600px - 2px;
+  }
+
+  body > #container  {  display: grid;
+    grid-template-columns: 150px 230px 500px;
+    grid-template-rows: 0em auto 1fr 0em;
+    grid-template-areas: "head head head" "foobar nav article" "aside aside article" "foot foot foot";
+    width: 185px + 195px + 600px;
+  }
+
+  body > footer {
+    width: 1000px;
+  }
+
+  aside {
+    padding: 20px;
+  }
+
+  #oneway {
+    top: 10px;
+    left: 185px + 195px + 600px - 120px;
+  }
+
+  #oneway { display: block; }
+  #kitcat { display: block; }
+  #dish { display: block; }
+  #fork { display: block; }
+}
+
+@media print {
+  body > header {
+    width: 185px + 195px + 600px - 2px;
+  }
+
+  body > #container  {  display: grid;
+    grid-template-columns: 150px 230px 500px;
+    grid-template-rows: 0em auto 1fr 0em;
+    grid-template-areas: "head head head" "foobar nav article" "aside aside article" "foot foot foot";
+    width: 185px + 195px + 600px;
+  }
+
+  body > footer {
+    width: 1000px;
+  }
+
+  nav, header, footer { display: none; }
+  #notice { display: none; }
+  #oneway { display: none; }
+  #kitcat { display: none; }
+  #dish { display: none; }
+}
+
+h1 {
+  font-family: Purisa;
+}
+
+ul {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+li {
+  display: inline;
+}
+
+li.space {
+  margin-right: 20px;
+}
+
+
+aside > section {
+  width: 254px;
+  margin: auto;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted #000;
+}
+
+article > h3 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+img {
+  border: 2px solid #000;
+  width: 250px;
+}
+
+#description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#kitcat {
+  float: left;
+  text-align: center;
+}
+
+#kitcat > img {
+  width: 100px;
+  margin: 0px;
+  padding: 0px;
+}
+
+section:after {
+  content: ".";
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0px;
+}
+
+section.notice p {
+  text-align: center;
+  color: green;
+  text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
+}
+
+section.error p {
+  text-align: center;
+  color: red;
+  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}
+
+.recipe {
+  background-image: url("toque.png");
+  background-repeat: no-repeat;
+}
+
+h2.recipe {
+  background-size: 30px 30px;
+  padding-left: 40px;
+}
+
+h3.recipe {
+  background-size: 20px 20px;
+  padding-left: 30px;
+}
+
+table {
+  width: 100%;
+}
+
