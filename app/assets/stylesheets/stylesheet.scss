@@ -41,8 +41,6 @@ nav {
 
 aside {
   width: calc(100% - 40px);
-  padding: 20px;
-  min-height: 300px;
   border: 0px solid #000;
   grid-area: aside;
 }
@@ -100,6 +98,10 @@ article {
     width: 360px;
   }
 
+  aside {
+    padding: 0px;
+  }
+
   #oneway {
     top: 80px;
     left: 360px - 100px;
@@ -124,6 +126,10 @@ article {
 
   body > footer {
     width: 1000px;
+  }
+
+  aside {
+    padding: 20px;
   }
 
   #oneway {
