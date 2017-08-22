@@ -5,20 +5,20 @@
   </div>
 
   <div class="field">
+    <%= f.label :unit %>
+    <%= f.text_field :unit %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-  <%= f.select(:product_id) do %>
-    <% products = Product.order(created_at: :desc).map { |value| [value.title, value.id] } %>
+    <%= f.select(:product_id) do %>
+    <% products = Product.order(title: :asc).map { |value| [value.title, value.id] } %>
     <%= options_for_select(products, selected: ingredient.product_id) %>
-  <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :unit %>
-    <%= f.text_field :unit %>
+    <% end %>
   </div>
 
   <div class="actions">
