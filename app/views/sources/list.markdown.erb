@@ -1,5 +1,5 @@
 <% @recipes.each do |value| %>
   <% if value.sources.length > 0 %>
-* <%= value.title %>: <% value.sources[0...-1].each do |source| %>[<%= source.name -%>](<%= source.url %>), <% end %><% if source = value.sources.last %>[<%= source.name %>](<%= source.url %>)<% end %>
+* <%= value.title %>: <% value.sources[0...-1].each do |source| %>[<%= source.name -%>](<%= source.url %>), <% end %><% source = value.sources.last %>[<%= source.name %>](<%= source.url %>)
   <% end %>
 <% end %>

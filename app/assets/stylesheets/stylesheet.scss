@@ -184,7 +184,7 @@ li.space {
 }
 
 
-aside > section {
+aside section {
   width: 254px;
   margin: auto;
   margin-top: 10px;
@@ -219,7 +219,7 @@ img {
   padding: 0px;
 }
 
-section:after {
+aside section:after {
   content: ".";
   clear: both;
   display: block;
@@ -227,13 +227,13 @@ section:after {
   height: 0px;
 }
 
-section.notice p {
+aside section.notice p {
   text-align: center;
   color: green;
   text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
 }
 
-section.error p {
+aside section.error p {
   text-align: center;
   color: red;
   text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
@@ -258,3 +258,58 @@ table {
   width: 100%;
 }
 
+th, td {
+  vertical-align: top;
+}
+
+th {
+  text-align: left;
+  width: 300px;
+}
+
+td {
+  text-align: center;
+  width: 60px;
+}
+
+td:first-child, td:last-child {
+  text-align: right;
+}
+
+article h2 {
+  position: fixed;
+  top: 120px;
+  left: 975px;
+  transform: rotate(90deg);
+  transform-origin: 0% 100%;
+  background-color: #eaeaea;
+  padding: 5px 20px 5px 20px;
+  border-top: 2px solid #afafaf;
+  border-left: 2px solid #afafaf;
+  border-right: 2px solid #afafaf;
+  font-size: 1.3em;
+}
+
+article section:nth-child(odd) {
+  background-color: #e2e2e2;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+tr.change:nth-child(odd) {
+  background-color: #e2e2e2;
+}
+
+article section.body p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.shop {
+  padding-left: 30px;
+  background-image: url("shoppingcart.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+}

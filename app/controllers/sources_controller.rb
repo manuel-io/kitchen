@@ -5,6 +5,7 @@ class SourcesController < ApplicationController
   # GET /sources
   # GET /sources.json
   def index
+    @recipes = Recipe.order(title: :asc)
     @sources = Source.all
   end
 

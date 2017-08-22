@@ -12,28 +12,24 @@
 </aside>
 
 <article>
-<h2>Sources</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sources.each do |source| %>
-      <tr>
-        <td><%= source.name %></td>
-        <td><%= source.url %></td>
-        <td><%= link_to 'Show', source %></td>
-        <td><%= link_to 'Edit', edit_source_path(source) %></td>
-        <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <h2>Sources</h2>
+  <% @recipes.each do |value| %>
+    <% if value.sources.length > 0 %>
+    <section>
+      <h3 class='recipe'><%= value.title %></h3>
+        <table>
+        <% value.sources.each do |source| %>
+          <tbody>
+            <tr>
+              <th><%= source.name %></th>
+              <td><%= link_to 'Show', source %></td>
+              <td><%= link_to 'Edit', edit_source_path(source) %></td>
+              <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+    </section>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
 </article>
-

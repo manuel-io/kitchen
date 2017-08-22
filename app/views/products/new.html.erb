@@ -1,0 +1,19 @@
+<nav>
+  <%= link_to 'Back', products_path %>
+</nav>
+
+<aside>
+  <% if @product.errors.any? %>
+  <section class='error'>
+    <% @product.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+      </ul>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>New Product</h2>
+  <%= render 'form', product: @product %>
+</article>

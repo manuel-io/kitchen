@@ -1,12 +1,7 @@
 <%= form_for([@component, @ingredient]) do |f| %>
   <div class="field">
     <%= f.label :amount %>
-    <%= f.number_field :amount, step: 0.125 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :unit %>
-    <%= f.text_field :unit %>
+    <%= f.number_field :amount, step: 0.125, autofocus: true %>
   </div>
 
   <div class="field">
@@ -14,8 +9,18 @@
     <%= f.text_field :name %>
   </div>
 
-<!--  <div class="field :component_id">
--->
+  <div class="field">
+  <%= f.select(:product_id) do %>
+    <% products = Product.order(created_at: :desc).map { |value| [value.title, value.id] } %>
+    <%= options_for_select(products, selected: ingredient.product_id) %>
+  <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit %>
+    <%= f.text_field :unit %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

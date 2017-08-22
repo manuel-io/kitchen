@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616151804) do
+ActiveRecord::Schema.define(version: 20170821171350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,51 @@ ActiveRecord::Schema.define(version: 20170616151804) do
     t.integer  "component_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "product_id"
     t.index ["component_id"], name: "index_ingredients_on_component_id", using: :btree
+    t.index ["product_id"], name: "index_ingredients_on_product_id", using: :btree
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "amount"
+    t.decimal  "price"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "liquid"
+    t.integer  "codes",         default: [],              array: true
+    t.integer  "tsp"
+    t.integer  "tbsp"
+    t.decimal  "energy"
+    t.decimal  "protein"
+    t.decimal  "fat_total"
+    t.decimal  "fat_saturated"
+    t.decimal  "carbohydrate"
+    t.decimal  "sugar"
+    t.decimal  "magnesium"
+    t.decimal  "calcium"
+    t.decimal  "potassium"
+    t.decimal  "iron"
+    t.decimal  "zinc"
+    t.decimal  "iodine"
+    t.decimal  "omega3"
+    t.decimal  "selenium"
+    t.decimal  "fiber"
+    t.decimal  "natrium"
+    t.decimal  "folic"
+    t.decimal  "b1"
+    t.decimal  "b2"
+    t.decimal  "b3"
+    t.decimal  "b5"
+    t.decimal  "b6"
+    t.decimal  "b12"
+    t.decimal  "c"
+    t.decimal  "d2"
+    t.decimal  "e"
+    t.decimal  "h"
+    t.decimal  "k"
+    t.decimal  "a"
+    t.decimal  "b9"
   end
 
   create_table "recipes", force: :cascade do |t|

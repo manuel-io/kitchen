@@ -20,11 +20,13 @@
         <% if signed_in? %>
         <li><%= link_to 'Administration', admin_root_path %></li> |
         <li class='space'><%= link_to "Sign out", logout_session_path %></li>
+        <li><%= link_to "Products", products_path %></li> |
         <li><%= link_to "Recipes", recipes_path %></li> |
         <li><%= link_to "Components", components_path %></li> |
         <li><%= link_to "Sources", sources_path %></li>
         <% else %>
         <li class='space'><%= link_to "Sign in", new_session_path %></li>
+        <li><%= link_to "Products", products_path %></li> |
         <li><%= link_to "Recipes", recipes_path %></li> |
         <li><%= link_to "Components", components_path %></li> |
         <li><%= link_to "Sources", sources_path %></li>
