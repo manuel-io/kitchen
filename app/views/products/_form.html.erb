@@ -1,0 +1,111 @@
+<%= form_for(product) do |f| %>
+  <section>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :liquid, 'Liquid' %>
+      <%= f.radio_button :liquid, true %>
+      <%= f.label 'Solid' %>
+      <%= f.radio_button :liquid, false, checked: (!product.liquid) %>
+    </div>
+
+    <div class="field">
+      <% unit = if product.liquid then 'ml' else 'g' end %>
+      <%= f.label :amount %>
+      <%= f.number_field :amount %><span class='unit'><%= unit %></span>
+    </div>
+
+    <div class="field">
+      <%= f.label :price %>
+      <%= f.number_field :price, step: 0.01 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tsp, 'Teelöffel' %>
+      <%= f.number_field :tsp %><span class='unit'><%= unit %></span>
+    </div>
+
+    <div class="field">
+      <%= f.label :tbsp, 'Eßlöffel' %>
+      <%= f.number_field :tbsp %><span class='unit'><%= unit %></span>
+    </div>
+  </section>
+
+  <section>
+    <h3>Nährwerte / 100 <span class='unit'><%= unit %></span></h3>
+    <div class="field">
+      <%= f.label :energy %>
+      <%= f.number_field :energy %>J
+    </div>
+
+    <div class="field">
+      <%= f.label :fat_total %>
+      <%= f.number_field :fat_total, step: 0.1 %>g
+    </div>
+
+    <div class="field">
+      <%= f.label :fat_saturated %>
+      <%= f.number_field :fat_saturated, step: 0.1 %>g
+    </div>
+
+    <div class="field">
+      <%= f.label :carbohydrate %>
+      <%= f.number_field :carbohydrate, step: 0.1 %>g
+    </div>
+
+    <div class="field">
+      <%= f.label :sugar %>
+      <%= f.number_field :sugar, step: 0.1 %>g
+    </div>
+
+    <div class="field">
+      <%= f.label :fiber %>
+      <%= f.number_field :fiber, step: 0.1 %>g
+    </div>
+
+    <div class="field">
+      <%= f.label :protein %>
+      <%= f.number_field :protein, step: 0.1 %>g
+    </div>
+  </section>
+
+  <section>
+    <h3>Vitamine / 100 <%= unit %></h3>
+    <div class="field">
+      <%= f.label :a, 'Vitamin A' %>
+      <%= f.number_field :a, step: 0.1 %>ug
+    </div>
+
+    <div class="field">
+      <%= f.label :b9, 'Folsäure' %>
+      <%= f.number_field :b9, step: 0.1 %>ug
+    </div>
+  </section>
+
+  <section>
+    <h3>Mineralien / 100 <span class='unit'><%= unit %></span></h3>
+    <div class="field">
+      <%= f.label :natrium %>
+      <%= f.number_field :natrium, step: 0.01 %>mg
+    </div>
+    <div class="field">
+      <%= f.label :potassium %>
+      <%= f.number_field :potassium, step: 0.01 %>mg
+    </div>
+    <div class="field">
+      <%= f.label :magnesium %>
+      <%= f.number_field :magnesium, step: 0.01 %>mg
+    </div>
+    <div class="field">
+      <%= f.label :calcium %>
+      <%= f.number_field :calcium, step: 0.01 %>mg
+    </div>
+  </section>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

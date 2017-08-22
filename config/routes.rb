@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   resources :sources do
     get 'list', on: :collection
   end

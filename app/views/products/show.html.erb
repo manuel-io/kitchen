@@ -1,0 +1,170 @@
+<% unit = if @product.liquid then 'ml' else 'g' end %>
+
+<nav>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', products_path %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= @product.title %></h2>
+  <section>
+    <table>
+      <tr>
+        <th>Menge:</th>
+        <td><%= @product.amount %></td>
+        <td><%= unit %></td>
+      </tr>
+      <tr>
+        <th>Preis:</th>
+        <td><%= @product.price_s %></td>
+        <td>EUR</td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <table>
+      <tr>
+        <th>Teelöffel:</th>
+        <td><%= @product.tsp %></td>
+        <td><%= unit %></td>
+      </tr>
+      <tr>
+        <th>Eßlöffel:</th>
+        <td><%= @product.tbsp %></td>
+        <td><%= unit %></td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h3>Nährwerte / 100 <%= unit %></h3>
+    <table>
+      <tr class='change nutritional'>
+        <th>Brennwert:</th>
+        <td><%= @product.energy %></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>Fett:</th>
+        <td><%= @product.fat_total %></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>- davon gesättigte Fettsäuren:</th>
+        <td><%= @product.fat_saturated %></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>Kohlenhydrate:</th>
+        <td><%= @product.carbohydrate%></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>- davon Zucker:</th>
+        <td><%= @product.sugar %></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>Ballaststoffe:</th>
+        <td><%= @product.fiber %></td>
+      </tr>
+      <tr class='change nutritional'>
+        <th>Eiweiß:</th>
+        <td><%= @product.protein %></td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h3>Vitamine / 100 <%= unit %></h3>
+    <table>
+      <tr class='change vitamin'>
+        <th>Vitamin A</th>
+        <th>Retinol</th>
+        <td><%= @product.a %></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B1</th>
+        <th>Thiamin</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B2</th>
+        <th>Riboflavin</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B3</th>
+        <th>Nicotinsäure (Niacin)</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B5</th>
+        <th>Pantothensäure</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B6</th>
+        <th>Pyridoxalphosphat</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B9</th>
+        <th>Folsäure</th>
+        <td><%= @product.b9 %></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin B12</th>
+        <th>Cobalamin</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin C</th>
+        <th>Ascorbinsäure</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin D2</th>
+        <th>Ergocalciferol</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin D3</th>
+        <th>Cholecalciferol</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin E</th>
+        <th>Tocopherol</th>
+        <td></td>
+      </tr>
+      <tr class='change vitamin'>
+        <th>Vitamin H:</th>
+        <th>Biotin</th>
+        <td></td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h3>Mineralien / 100 <%= unit %></h3>
+    <table>
+      <tr class='change mineral'>
+        <th>Natrium:</th>
+        <td><%= @product.natrium %></td>
+      </tr>
+      <tr class='change mineral'>
+        <th>Kalium:</th>
+        <td><%= @product.potassium %></td>
+      </tr>
+      <tr class='change mineral'>
+        <th>Magnesium:</th>
+        <td><%= @product.magnesium %></td>
+      </tr>
+      <tr class='change mineral'>
+        <th>Calcium:</th>
+        <td><%= @product.calcium %></td>
+      </tr>
+    </table>
+  </section>
+</article>

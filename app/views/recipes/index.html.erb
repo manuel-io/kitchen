@@ -2,7 +2,6 @@
   <%= link_to 'New Recipe', new_recipe_path %>
 </nav>
 
-
 <aside>
   <% if notice %>
   <section class='notice'>
@@ -21,23 +20,19 @@
 
 <article>
   <h2>Recipes</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @recipes.each do |recipe| %>
-        <tr>
-          <td><%= recipe.title %></td>
-          <td><%= link_to 'Show', recipe %></td>
-          <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-          <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% @recipes.each do |recipe| %>
+    <section>
+      <h3 class='recipe'><%= recipe.title%></h3>
+      <table>
+        <tbody>
+          <tr>
+            <th></th>
+            <td><%= link_to 'Show', recipe_path(recipe) %></td>
+            <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+            <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  <% end %>
 </article>

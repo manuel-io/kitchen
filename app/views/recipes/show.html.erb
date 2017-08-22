@@ -31,18 +31,23 @@
 </aside>
 
 <article>
-  <h2 class='recipe'><%= @recipe.title %></h2>
-  <p><strong>Last:</strong><%= @recipe.last %></p>
-  <p><strong>Serves:</strong><%= @recipe.portion %> Persons</p>
-  <p id='description'><%= @recipe.description %></p>
+  <header>
+    <h2><%= @recipe.title %></h2>
+    <p><strong>Last:</strong><%= @recipe.last %></p>
+    <p><strong>Serves:</strong><%= @recipe.portion %> Persons</p>
+    <p id='description'><%= @recipe.description %></p>
+ </header>
+ <section class='body'>
   <% @recipe.components.order(title: :asc).each do |component| %>
     <h3><%= component.title  %></h3>
     <p><%= markdown(component.description) %></p>
   <% end %>
+  </section>
 
-  <h3>Quellen</h3>
-  <% @recipe.sources.each do |source| %>
-    <p><a href='<%= source.url %>'><%= source.name %></a></p>
-  <% end %>
+  <footer>
+    <h3>Quellen</h3>
+    <% @recipe.sources.each do |source| %>
+      <p><a href='<%= source.url %>'><%= source.name %></a></p>
+    <% end %>
+  </footer>
 </article>
-
