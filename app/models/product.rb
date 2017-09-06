@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_many :ingredients
   validates :title, presence: true, length: { minimum: 4 }, uniqueness: true
   validates :amount, presence: true,  numericality: { only_integer: true, greater_than: 0 }
   validates :price, presence: true,  numericality: { greater_than: 0 }
