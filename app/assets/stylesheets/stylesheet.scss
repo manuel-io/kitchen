@@ -110,6 +110,7 @@ article {
   #kitcat { display: block; }
   #dish { display: none; }
   #fork { display: none; }
+  .print { display: none; }
 }
 
 @media screen and (min-width: 1000px) {
@@ -160,10 +161,12 @@ article {
   }
 
   nav, header, footer { display: none; }
+  body footer { display: block; }
   #notice { display: none; }
   #oneway { display: none; }
   #kitcat { display: none; }
   #dish { display: none; }
+  .print { display: block; }
 }
 
 h1 {
