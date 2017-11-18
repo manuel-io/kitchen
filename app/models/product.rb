@@ -5,11 +5,6 @@ class Product < ApplicationRecord
   validates :price, presence: true,  numericality: { greater_than: 0 }
   validates :liquid, inclusion: { in: [ true, false ] }
 
-  def code
-    return code if code = self.codes.first
-    self.title
-  end
-
   def price_s
     "%.2f" % self.price
   end
