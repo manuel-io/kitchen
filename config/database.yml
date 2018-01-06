@@ -4,7 +4,7 @@ default: &default
   encoding: unicode
   pool: 5
   username: manuel
-  password: qwdghf23qw
+  password: <%= ENV['RAILS_DB_PWD'] %>
 
 development:
   <<: *default
