@@ -39,8 +39,10 @@
  </header>
  <section class='body'>
   <% @recipe.components.order(title: :asc).each do |component| %>
+    <% unless component.description.empty? %>
     <h3><%= component.title  %></h3>
     <p><%= markdown(component.description) %></p>
+   <% end %>
   <% end %>
   </section>
 
