@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821171350) do
+ActiveRecord::Schema.define(version: 20180211142249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,9 @@ ActiveRecord::Schema.define(version: 20170821171350) do
     t.string   "title"
     t.integer  "amount"
     t.decimal  "price"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.boolean  "liquid"
-    t.integer  "codes",         default: [],              array: true
     t.integer  "tsp"
     t.integer  "tbsp"
     t.decimal  "energy"
@@ -76,6 +75,9 @@ ActiveRecord::Schema.define(version: 20170821171350) do
     t.decimal  "k"
     t.decimal  "a"
     t.decimal  "b9"
+    t.string   "manufacturer"
+    t.string   "shop"
+    t.string   "code"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -97,6 +99,22 @@ ActiveRecord::Schema.define(version: 20170821171350) do
     t.index ["recipe_id"], name: "index_sources_on_recipe_id", using: :btree
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_taggings_on_recipe_id", using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
     t.string   "password_digest", null: false
@@ -106,4 +124,6 @@ ActiveRecord::Schema.define(version: 20170821171350) do
   end
 
   add_foreign_key "sources", "recipes"
+  add_foreign_key "taggings", "recipes"
+  add_foreign_key "taggings", "tags"
 end

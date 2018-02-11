@@ -69,6 +69,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :amount, :tsp, :tbsp, :price, :liquid, :energy, :fat_total, :fat_saturated, :carbohydrate, :sugar, :fiber, :protein, :a, :b9, :natrium, :potassium, :magnesium, :calcium)
+      params.require(:product).permit(:manufacturer, :shop, :code, :title, :amount, :tsp, :tbsp, :price, :liquid, :energy, :fat_total, :fat_saturated, :carbohydrate, :sugar, :fiber, :protein, :a, :b9, :natrium, :potassium, :magnesium, :calcium)
     end
 end

@@ -7,6 +7,63 @@
     <p id="notice"><%= notice %></p>
   </section>
   <% end %>
+  
+  <section>
+    <p>
+      Dies ist eine Liste mit verweisen auf die Quellen der Rezepte in
+      dieser Datenbank. Die Rezepte in dieser Datenbank sind alle vegan.
+      Dies muss aber nicht unbedingt auch auf die Rezepte in den Quellen
+      zutreffen.
+    </p>
+  </section>
+
+  <section>
+    <h3>Filter</h3>
+    <table>
+      <tr>
+        <td>
+          <ul>
+            <li><a href='?tags=main,soup'>Hauptgerichte und Suppen</a></li>
+            <li><a href='?tags=main'>Hauptgerichte</a></li>
+            <li><a href='?tags=sauce'>Suppen</a></li>
+            <li><a href='?tags=soup'>Saucen</a></li>
+            <li><a href='?tags=dip'>Dips</a></li>
+            <li><a href='?tags=bread'>Backwaren</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h3>Formate</h3>
+    <table>
+      <tr>
+        <td>
+          <a href='sources.markdown?tags=<%= params['tags'] %>'>
+            Markdown
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href='sources.text?tags=<%= params['tags'] %>'>
+            Text
+          </a>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <p>
+      Warum hier nur die Quellen zu den eigentlich von mir zubereiteten
+      Rezepten zu finden sind,
+      <a href='https://manuel-io.github.io/blog/2017/06/03/recipes/'>
+        steht hier
+      </a>.
+    </p>
+  </section>
 </aside>
 
 <article>

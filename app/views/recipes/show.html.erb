@@ -39,8 +39,10 @@
  </header>
  <section class='body'>
   <% @recipe.components.order(title: :asc).each do |component| %>
+    <% unless component.description.empty? %>
     <h3><%= component.title  %></h3>
     <p><%= markdown(component.description) %></p>
+   <% end %>
   <% end %>
   </section>
 
@@ -48,6 +50,10 @@
     <h3>Quellen</h3>
     <% @recipe.sources.each do |source| %>
       <p><a href='<%= source.url %>'><%= source.name %></a></p>
+      <div class='print'>
+        <span>- <%= source.url %></span>
+        <br />
+      </div>
     <% end %>
   </footer>
 </article>

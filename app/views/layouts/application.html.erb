@@ -33,7 +33,15 @@
       <% end %>
       </ul>
     </header>
-    <div id='container'><%= yield %></div>
+    <% if @recipe %>
+    <div class='print'>
+      <h2><%= @recipe.title %></h2>
+      <br />
+    </div>
+    <% end %>
+    <div id='container'>
+      <%= yield %>
+    </div>
     <footer></footer>
   </body>
 </html>

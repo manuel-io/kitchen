@@ -3,8 +3,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: kitchen
-  password: qwdghf23qw
+  username: manuel
+  password: <%= ENV['RAILS_DB_PWD'] %>
 
 development:
   <<: *default
