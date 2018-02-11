@@ -65,9 +65,17 @@ class SourcesController < ApplicationController
   end
 
   def list
-    @recipes = Recipe.order(title: :asc)
+    @recipes = if params.has_key?(:tags) and !params[:tags].empty?
+      Recipe.order(title: :asc).reject do |recipe|
+        not recipe.all_tags.split(',').any? { |v| params[:tags].split(',').include? v }
+      end
+    else
+      Recipe.order(title: :asc)
+    end
+
     respond_to do |format|
       format.html { render }
+      format.text { render }
       format.markdown { render content_type: 'text/plain' }
     end
   end

@@ -23,6 +23,10 @@
     <%= f.file_field :picture, accept: 'image/jpeg', multiple: false %>
   </div>
 
+  <div class="field">
+    <%= f.text_field :all_tags, placeholder: 'Tags separated with comma' %> 
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
