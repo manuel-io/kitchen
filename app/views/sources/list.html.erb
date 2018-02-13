@@ -25,10 +25,13 @@
           <ul>
             <li><a href='?tags=main,soup'>Hauptgerichte und Suppen</a></li>
             <li><a href='?tags=main'>Hauptgerichte</a></li>
+            <li><a href='?tags=dessert'>Nachspeisen</a></li>
             <li><a href='?tags=soup'>Suppen</a></li>
             <li><a href='?tags=sauce'>Saucen</a></li>
             <li><a href='?tags=dip'>Dips</a></li>
             <li><a href='?tags=bread'>Backwaren</a></li>
+            <li><a href='?tags=milk'>Pflanzenmilch</a></li>
+            <li><a href='?tags=ingredient'>Komponenten</a></li>
           </ul>
         </td>
       </tr>
@@ -36,18 +39,18 @@
   </section>
 
   <section>
-    <h3>Formate</h3>
+    <h3><%= t :format %></h3>
     <table>
       <tr>
         <td>
-          <a href='sources.markdown?tags=<%= params['tags'] %>'>
+          <a href='list.markdown?tags=<%= params['tags'] %>'>
             Markdown
           </a>
         </td>
       </tr>
       <tr>
         <td>
-          <a href='sources.text?tags=<%= params['tags'] %>'>
+          <a href='list.text?tags=<%= params['tags'] %>'>
             Text
           </a>
         </td>
@@ -67,7 +70,7 @@
 </aside>
 
 <article>
-  <h2>List</h2>
+  <h2><%= t(:list) %></h2>
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
     <section>

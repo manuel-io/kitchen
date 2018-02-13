@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cooking</title>
+    <title>Cooking<% if signed_in? %> - <%= current_user.nick %><% end %></title>
     <meta name='HandheldFriendly' content='True'>
     <meta name='MobileOptimized' content='360'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <% if signed_in? %>
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <% else %>
+    <meta http-equiv='cache-control' content='public'>
+    <% end %>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,22 +22,23 @@
     <div id='oneway'></div>
     <header>
       <h1>Manuels Rezepte</h1>
-      <ul>
         <% if signed_in? %>
-        <li><%= link_to 'Administration', admin_root_path %></li> |
-        <li class='space'><%= link_to "Sign out", logout_session_path %></li>
-        <li><%= link_to "Products", products_path %></li> |
-        <li><%= link_to "Recipes", recipes_path %></li> |
-        <li><%= link_to "Components", components_path %></li> |
-        <li><%= link_to "Sources", sources_path %></li>
-        <% else %>
-        <li class='space'><%= link_to "Sign in", new_session_path %></li>
-        <li><%= link_to "Products", products_path %></li> |
-        <li><%= link_to "Recipes", recipes_path %></li> |
-        <li><%= link_to "Components", components_path %></li> |
-        <li><%= link_to "Sources", sources_path %></li>
-      <% end %>
-      </ul>
+        <ul> 
+          <li><%= link_to 'Administration', admin_root_path %></li>
+          <li><%= link_to t(:sign_out), logout_session_path %></li>
+        </ul>
+        <% end %>
+        <ul>
+          <li><%= link_to t(:products), products_path %></li>
+          <li><%= link_to t(:recipes), recipes_path %></li>
+        <% if signed_in? %>
+          <li><%= link_to t(:components), components_path %></li>
+        <% end %>
+          <li><%= link_to t(:sources), sources_path %></li>
+        <% if not signed_in? %>
+          <li><%= link_to t(:sign_in), new_session_path %></li>
+        <% end %>
+        </ul>
     </header>
     <% if @recipe %>
     <div class='print'>

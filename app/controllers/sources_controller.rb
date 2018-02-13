@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  before_action :require_login, except: [ :list ]
   rescue_from ActionController::UnknownFormat, with: :raise_not_found
   before_action :set_source, only: [:show, :edit, :update, :destroy]
 
@@ -67,7 +68,9 @@ class SourcesController < ApplicationController
   def list
     @recipes = if params.has_key?(:tags) and !params[:tags].empty?
       Recipe.order(title: :asc).reject do |recipe|
-        not recipe.all_tags.split(',').any? { |v| params[:tags].split(',').include? v }
+        not recipe.all_tags.split(',').any? { |v|
+          params[:tags].split(',').include? v.strip
+        }
       end
     else
       Recipe.order(title: :asc)

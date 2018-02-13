@@ -1,3 +1,35 @@
 <nav>
   <%= link_to 'New User', new_admin_user_path %>
 </nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+
+  <% if alert %>
+  <section class='alert'>
+    <p id='alert'><%= alert %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t :users %></h2>
+  <% @users.each do |user| %>
+    <section>
+      <h3><%= user.nick %></h3>
+      <table>
+        <tbody>
+          <tr>
+            <th><%= user.email %></th>
+            <td><%= link_to t(:edit), edit_admin_user_path(user) %></td>
+            <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  <% end %>
+</article>

@@ -1,6 +1,6 @@
 <nav>
-<%= link_to 'New Source', new_source_path %> |
-<%= link_to 'List', list_sources_path %>
+<%= link_to t(:new_source), new_source_path %> |
+<%= link_to t(:list), list_sources_path %>
 </nav>
 
 <aside>
@@ -12,7 +12,7 @@
 </aside>
 
 <article>
-  <h2>Sources</h2>
+  <h2><%= t(:sources) %></h2>
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
     <section>

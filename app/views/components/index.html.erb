@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to 'New Component', new_component_path %>
+  <%= link_to t(:new_component), new_component_path %>
 </nav>
 
 <aside>
@@ -11,7 +11,7 @@
 </aside>
 
 <article>
-  <h2>Components</h2>
+  <h2><%= t :components %></h2>
   <% @recipes.each do |recipe| %>
   <section>
     <h3 class='recipe'><%= recipe.title %></h3>

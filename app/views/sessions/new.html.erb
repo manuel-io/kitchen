@@ -1,15 +1,24 @@
 <article>
-<%= form_for :session, url: session_path do |form| %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-  <div>
-    <%= form.submit "Sign in" %>
-  </div>
-<% end %>
+  <h2><%= t(:sign_in) %></h2>
+
+  <%= form_for :session, url: session_path do |form| %>
+  <fieldset>
+    <legend><%= t(:credentials) %></legend>
+
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email, autofocus: true, require: true %>
+    </div>
+
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password, require: true %>
+    </div>
+
+    <div class='actions'>
+      <%= form.submit t(:sign_in) %>
+    </div>
+
+  </fieldset>
+  <% end %>
 </article>

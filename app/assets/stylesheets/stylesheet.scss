@@ -28,6 +28,37 @@ body > #container  {
   padding-top: 20px;
 }
 
+fieldset {
+
+  legend {
+    padding: 10px;
+    margin-top: -25px;
+    margin-left: 20px;
+    font-weight: bold;
+    border: 0px;
+    line-height: 1px;
+  }
+
+  div {
+    margin: 10px;
+  }
+
+  div input {
+    width: 96%;
+  }
+
+  div.actions {
+    text-align: center;
+  }
+
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  margin-bottom: 30px;
+
+}
+
 body > footer {
   background-image: url("book-footer.png");
   background-repeat: no-repeat;
@@ -84,7 +115,8 @@ article {
 @media screen and (min-width: 0px) {
   body > header {
     width: 360px - 2px;
-    ul { padding-right: 105px; }
+    ul { padding-left: 0px; padding-right: 100px; }
+    ul li+li:before { content: " | " }
   }
 
   body > #container  {
@@ -116,6 +148,7 @@ article {
 @media screen and (min-width: 1000px) {
   body > header {
     width: 185px + 195px + 600px - 2px;
+    ul { padding-left: 100px; padding-right: 100px; }
   }
 
   body > #container  {  display: grid;
@@ -236,6 +269,12 @@ aside section.notice p {
   text-shadow: -1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
 }
 
+aside section.alert p {
+  text-align: center;
+  color: red;
+  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}
+
 aside section.error p {
   text-align: center;
   color: red;
@@ -281,7 +320,7 @@ td:first-child, td:last-child {
 
 article h2 {
   position: fixed;
-  top: 120px;
+  top: 140px;
   left: 975px;
   transform: rotate(90deg);
   transform-origin: 0% 100%;
@@ -315,4 +354,8 @@ article section.body p {
   background-image: url("shoppingcart.png");
   background-size: 20px 20px;
   background-repeat: no-repeat;
+}
+
+label {
+  display: block;
 }

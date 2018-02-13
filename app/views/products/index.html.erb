@@ -11,7 +11,7 @@
 </aside>
 
 <article>
-  <h2>Products</h2>
+  <h2><%= t :products %></h2>
     <table>
       <tbody>
       <% @products.order(title: :asc).each do |product| %>

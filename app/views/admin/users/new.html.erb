@@ -1,26 +1,62 @@
-
-<article>
-<%= form_for @user, url: admin_users_path do |form| %>
-
+<aside>
   <% if @user.errors.any? %>
-    <%= pluralize(@user.errors.count, "error") %> prevented your account from being created:
-    <ul>
-      <% @user.errors.full_messages.each do |error_message| %>
-        <li><%= error_message %></li>
-      <% end %>
-    </ul>
+  <section class='error'>
+    <% @user.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+      </ul>
+  </section>
   <% end %>
 
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email, require: true %>
-  </div>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password, require: true %>
-  </div>
-  <div>
-    <%= form.submit "Sign up" %>
-  </div>
-<% end %>
+  <% if alert %>
+  <section class='alert'>
+    <p id='alert'><%= alert %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t(:user_new) %></h2>
+
+  <%= form_for @user, url: admin_users_path do |form| %>
+
+  <fieldset>
+    <legend>Personalia</legend>
+    <div>
+      <%= form.label :nick %>
+      <%= form.text_field :nick, autofocus: true, require: true %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contact</legend>
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email, placeholder: 'mail@exmaple.com', require: true %>
+    </div>
+    <div>
+      <%= form.label :email_verify %>
+      <%= form.email_field :email_verify, require: true %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Security</legend>
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password, placeholder: '********', require: true %>
+    </div>
+    <div>
+      <%= form.label :password_verfiy %>
+      <%= form.password_field :password_verify, require: true %>
+    </div>
+  </fieldset>
+    
+  <fieldset>
+    <div class='actions'>
+      <%= form.submit t(:sign_up) %>
+    </div>
+  </fieldset>
+
+  <% end %>
 </article>

@@ -1,6 +1,7 @@
 require 'mini_magick'
 
 class RecipesController < ApplicationController
+  before_action :require_login
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
