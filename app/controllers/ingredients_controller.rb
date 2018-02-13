@@ -1,4 +1,5 @@
 class IngredientsController < ApplicationController
+  before_action :require_login
   before_action :set_ingredient, only: [:edit, :update, :destroy]
 
   # GET /ingredients/new

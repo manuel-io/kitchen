@@ -1,4 +1,5 @@
 class ComponentsController < ApplicationController
+  before_action :require_login
   before_action :set_component, only: [:show, :edit, :update, :destroy]
 
   # GET /components

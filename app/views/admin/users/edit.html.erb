@@ -1,0 +1,68 @@
+<aside>
+  <% if @user.errors.any? %>
+  <section class='error'>
+    <% @user.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+      </ul>
+  </section>
+  <% end %>
+
+  <% if alert %>
+  <section class='alert'>
+    <p id='alert'><%= alert %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t(:user_update) %></h2>
+
+  <%= form_for [:admin, @user], url: admin_user_path do |f| %>
+  <fieldset>
+    <legend>Personalia</legend>
+    <div class="field">
+      <%= f.label :nick %>
+      <%= f.text_field :nick, autofocus: true, require: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit t(:update_settings) %>
+    </div>
+  </fieldset>
+  <% end %>
+
+  <%= form_for [:admin, @user], url: email_admin_user_path do |f| %>
+  <fieldset>
+    <legend>Contact</legend>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: @user.email, require: true %>
+    </div>
+    <div class="field">
+      <%= f.label :email_verify %>
+      <%= f.email_field :email_verify, require: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit t(:update_email) %>
+    </div>
+  </fieldset>
+  <% end %>
+
+  <%= form_for [:admin, @user], url: password_admin_user_path  do |f| %>
+  <fieldset>
+    <legend>Security</legend>
+    <div class="field">
+      <%= f.label :password_digest %>
+      <%= f.password_field :password_digest, placeholder: '********', require: true %>
+    </div>
+    <div class="field">
+      <%= f.label :password_verify %>
+      <%= f.password_field :password_verify, require: true %>
+    </div>
+    <div class="actions">
+      <%= f.submit t(:update_password) %>
+    </div>
+  </fieldset>
+  <% end %>
+
+</article>

@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, only: [:new, :create]
+    resources :users, only: [:new, :create, :edit, :update, :destroy] do
+      patch :email, on: :member
+      patch :password, on: :member
+    end
     root 'overview#index'
   end
 
@@ -22,6 +25,6 @@ Rails.application.routes.draw do
     resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
   end
 
-  root 'recipes#index'
+  root 'sources#list'
   # root 'sources#list', defaults: { format: 'markdown' }
 end
