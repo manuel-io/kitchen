@@ -1,7 +1,8 @@
 <nav>
   <h3><%= @component.recipe.title %></h3>
   <h4><%= @component.title %></h4>
-  <%= link_to 'Back', @component %>
+  <%= link_to t(:index), components_path(anchor: @component.recipe.id) %>
+  <%= link_to t(:details), @component %>
 </nav>
 
 <aside>
@@ -16,6 +17,6 @@
 </aside>
 
 <article>
-  <h2>Editing Component</h2>
+  <h2><%= t(:component_update) %> </h2>
   <%= render 'form', component: @component %>
 </article>

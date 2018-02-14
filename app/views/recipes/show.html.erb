@@ -31,12 +31,15 @@
 </aside>
 
 <article>
+  <h2><%= @recipe.title %></h2>
+
   <header>
     <h2><%= @recipe.title %></h2>
-    <p><strong>Last:</strong><%= @recipe.last %></p>
-    <p><strong>Serves:</strong><%= @recipe.portion %> Persons</p>
+    <p><strong><%= t(:made) %>:</strong> <%= @recipe.last %></p>
+    <p><strong><%= t(:serves) %>:</strong> <%= @recipe.serves %></p>
     <p id='description'><%= @recipe.description %></p>
  </header>
+
  <section class='body'>
   <% @recipe.components.order(title: :asc).each do |component| %>
     <% unless component.description.empty? %>

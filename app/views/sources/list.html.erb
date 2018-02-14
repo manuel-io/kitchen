@@ -32,6 +32,7 @@
             <li><a href='?tags=bread'>Backwaren</a></li>
             <li><a href='?tags=milk'>Pflanzenmilch</a></li>
             <li><a href='?tags=ingredient'>Komponenten</a></li>
+            <li><a href='?tags=salad'>Salate</a></li>
           </ul>
         </td>
       </tr>
@@ -51,6 +52,13 @@
       <tr>
         <td>
           <a href='list.text?tags=<%= params['tags'] %>'>
+            <%= t(:text_desc) %>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href='list.plain?tags=<%= params['tags'] %>'>
             Text
           </a>
         </td>
@@ -75,6 +83,7 @@
     <% if value.sources.length > 0 %>
     <section>
       <h3 class='recipe'><%= value.title %></h3>
+      <p><%= value.description %></p>
       <% value.sources[0...-1].each do |source| %>
         <a href='<%= source.url %>'><%= source.name %></a>,
       <% end %>

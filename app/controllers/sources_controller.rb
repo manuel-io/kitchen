@@ -80,6 +80,7 @@ class SourcesController < ApplicationController
       format.html { render }
       format.text { render }
       format.markdown { render content_type: 'text/plain' }
+      format.plain { render content_type: 'text/plain' }
     end
   end
 

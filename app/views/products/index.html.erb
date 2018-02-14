@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to 'New Product', new_product_path %>
+  <%= link_to t(:product_new), new_product_path %>
 </nav>
 
 <aside>
@@ -15,7 +15,7 @@
     <table>
       <tbody>
       <% @products.order(title: :asc).each do |product| %>
-        <tr class='change'>
+        <tr id='<%= product.id %>' class='change'>
           <th><%= product.title %></th>
           <td><%= link_to 'Show', product %></td>
           <td><%= link_to 'Edit', edit_product_path(product) %></td>

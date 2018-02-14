@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213120625) do
+ActiveRecord::Schema.define(version: 20180214090619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20180213120625) do
     t.text     "description"
     t.date     "last"
     t.binary   "picture"
-    t.integer  "portion"
+    t.integer  "serves"
   end
 
   create_table "sources", force: :cascade do |t|

@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to 'Back', components_path %>
+  <%= link_to t(:index), components_path %>
 </nav>
 
 <aside>
@@ -14,7 +14,6 @@
 </aside>
 
 <article>
-  <h2>New Component</h2>
+  <h2><%= t(:component_new) %></h2>
   <%= render 'form', component: @component %>
 </article>
-

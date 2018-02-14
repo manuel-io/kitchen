@@ -1,33 +1,50 @@
 <%= form_for(recipe) do |f| %>
+<fieldset>
+
   <div class="field">
-    <%= f.label :title %>
+    <%= f.label t(:title) %>
     <%= f.text_field :title, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
+    <%= f.label t(:description) %>
     <%= f.text_area :description %>
   </div>
 
+</fieldset>
+<fieldset>
+
   <div class="field">
-    <%= f.label :portion %>
-    <%= f.number_field :portion %>
+    <%= f.label t(:serves) %>
+    <%= f.number_field :serves %>
   </div>
 
   <div class="field">
-    <%= f.label :last %>
+    <%= f.label t(:made) %>
     <%= f.date_select :last %>
   </div>
+
+</fieldset>
+<fieldset>
 
   <div class="field">
     <%= f.file_field :picture, accept: 'image/jpeg', multiple: false %>
   </div>
 
+</fieldset>
+<fieldset>
+  <legend><%= t(:tags) %></legend>
+
   <div class="field">
-    <%= f.text_field :all_tags, placeholder: 'Tags separated with comma' %> 
+    <%= f.text_field :all_tags, placeholder: t(:tags_desc) %> 
   </div>
 
+</fieldset>
+<fieldset>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:recipe_save) %>
   </div>
+
+</fieldset>
 <% end %>

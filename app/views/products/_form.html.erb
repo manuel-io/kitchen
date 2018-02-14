@@ -1,47 +1,50 @@
 <%= form_for(product) do |f| %>
 
-  <section>
-    <h3>Produktinformationen</h3>
+  <fieldset>
+    <legend><%= t(:product_info) %></legend>
     <div class="field">
-      <%= f.label :manufacturer %>
+      <%= f.label t(:manufacturer) %>
       <%= f.text_field :manufacturer %>
     </div>
     <div class="field">
-      <%= f.label :shop %>
+      <%= f.label t(:shop) %>
       <%= f.text_field :shop %>
     </div>
     <div class="field">
-      <%= f.label :code %>
+      <%= f.label t(:code) %>
       <%= f.text_field :code %>
     </div>
     <div class="field">
-      <%= f.label :title %>
+      <%= f.label t(:title) %>
       <%= f.text_field :title, autofocus: true %>
     </div>
-  </section>
+  </fieldset>
 
-  <section>
+  <fieldset>
+    <legend><%= t(:details) %></legend>
+
     <div class="field">
-      <%= f.label :liquid, 'Liquid' %>
+      <%= f.label t(:liquid) %>
       <%= f.radio_button :liquid, true %>
-      <%= f.label 'Solid' %>
+      <%= f.label t(:solid) %>
       <%= f.radio_button :liquid, false, checked: (!product.liquid) %>
     </div>
 
     <div class="field">
       <% unit = if product.liquid then 'ml' else 'g' end %>
-      <%= f.label :amount %>
+      <%= f.label t(:amount) %>
       <%= f.number_field :amount %><span class='unit'><%= unit %></span>
     </div>
 
     <div class="field">
-      <%= f.label :price %>
+      <%= f.label t(:price) %>
       <%= f.number_field :price, step: 0.01 %>
     </div>
-  </section>
+  </fieldset>
 
-  <section>
-    <h3>Nährwerte / 100 <span class='unit'><%= unit %></span></h3>
+  <fieldset>
+    <legend><%=t(:nutritionals) %> / 100 <span class='unit'><%= unit %></span></legend>
+
     <div class="field">
       <%= f.label :energy %>
       <%= f.number_field :energy %>J
@@ -76,10 +79,11 @@
       <%= f.label :protein %>
       <%= f.number_field :protein, step: 0.1 %>g
     </div>
-  </section>
+  </fieldset>
 
-  <section>
-    <h3>Vitamine / 100 <%= unit %></h3>
+  <fieldset>
+    <legend><%= t(:vitamins) %> / 100 <%= unit %></legend>
+
     <div class="field">
       <%= f.label :a, 'Vitamin A' %>
       <%= f.number_field :a, step: 0.1 %>ug
@@ -89,10 +93,11 @@
       <%= f.label :b9, 'Folsäure' %>
       <%= f.number_field :b9, step: 0.1 %>ug
     </div>
-  </section>
+  </fieldset>
 
-  <section>
-    <h3>Mineralien / 100 <span class='unit'><%= unit %></span></h3>
+  <fieldset>
+    <legend><%= t(:minerals) %> / 100 <span class='unit'><%= unit %></span></legend>
+
     <div class="field">
       <%= f.label :natrium %>
       <%= f.number_field :natrium, step: 0.01 %>mg
@@ -109,9 +114,11 @@
       <%= f.label :calcium %>
       <%= f.number_field :calcium, step: 0.01 %>mg
     </div>
-  </section>
+  </fieldset>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset>
+    <div class="actions">
+      <%= f.submit t(:product_save) %>
+    </div>
+  </fieldset>
 <% end %>
