@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  tags_descc: "Tags separated with a comma"

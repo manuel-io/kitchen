@@ -1,0 +1,3 @@
+<% @recipes.each_with_index do |value, index| %>
+<%= "%02d. %s" % [ index + 1, value.title ] %>
+<% end %>

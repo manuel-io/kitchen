@@ -13,7 +13,7 @@
 <article>
   <h2><%= t :components %></h2>
   <% @recipes.each do |recipe| %>
-  <section>
+  <section id='<%= recipe.id %>'>
     <h3 class='recipe'><%= recipe.title %></h3>
       <table>
         <tbody>

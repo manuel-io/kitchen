@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
   has_many :sources, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
-  validates :title, presence: true, length: { minimum: 5 }
+  validates :title, presence: true, uniqueness: true, length: { minimum: 5 }
 
   def tags_by_name(names)
    p names

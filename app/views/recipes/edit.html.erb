@@ -1,6 +1,7 @@
 <nav>
   <h3><%= @recipe.title %></h3>
-  <%= link_to 'Back', @recipe %>
+  <%= link_to t(:index), recipes_path(anchor: @recipe.id) %>
+  <%= link_to t(:details), @recipe %>
 </nav>
 
 <aside>
