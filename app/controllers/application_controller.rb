@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   helper_method :a
 
-  include Monban::ControllerHelpers
+  include Oath::ControllerHelpers
   protect_from_forgery with: :exception
 
   def a(string)
