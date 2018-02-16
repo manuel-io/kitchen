@@ -23,16 +23,16 @@
       <tr>
         <td>
           <ul>
-            <li><a href='?tags=main,soup'>Hauptgerichte und Suppen</a></li>
-            <li><a href='?tags=main'>Hauptgerichte</a></li>
-            <li><a href='?tags=dessert'>Nachspeisen</a></li>
-            <li><a href='?tags=soup'>Suppen</a></li>
-            <li><a href='?tags=sauce'>Saucen</a></li>
-            <li><a href='?tags=dip'>Dips</a></li>
-            <li><a href='?tags=bread'>Backwaren</a></li>
-            <li><a href='?tags=milk'>Pflanzenmilch</a></li>
-            <li><a href='?tags=ingredient'>Komponenten</a></li>
-            <li><a href='?tags=salad'>Salate</a></li>
+            <li><%= link_to 'Hauptgerichte und Suppen', list_sources_path(tags: 'main,soup') %></li>
+            <li><%= link_to 'Hauptgerichte', list_sources_path(tags: 'main') %></li>
+            <li><%= link_to 'Nachspeisen', list_sources_path(tags: 'dessert') %></li>
+            <li><%= link_to 'Suppen', list_sources_path(tags: 'soup') %></li>
+            <li><%= link_to 'Saucen', list_sources_path(tags: 'sauce') %></li>
+            <li><%= link_to 'Dips', list_sources_path(tags: 'dip') %></li>
+            <li><%= link_to 'Backwaren', list_sources_path(tags: 'bread') %></li>
+            <li><%= link_to 'Pflanzenmilch', list_sources_path(tags: 'milk') %></li>
+            <li><%= link_to 'Komponenten', list_sources_path(tags: 'ingredient') %></li>
+            <li><%= link_to 'Salate', list_sources_path(tags: 'salad') %></li>
           </ul>
         </td>
       </tr>
@@ -44,23 +44,17 @@
     <table>
       <tr>
         <td>
-          <a href='list.markdown?tags=<%= params['tags'] %>'>
-            Markdown
-          </a>
+          <%= link_to 'Markdown', list_sources_path(format: :markdown, tags: params['tags']) %>
         </td>
       </tr>
       <tr>
         <td>
-          <a href='list.text?tags=<%= params['tags'] %>'>
-            <%= t(:text_desc) %>
-          </a>
+          <%= link_to t(:text_desc), list_sources_path(format: :text, tags: params['tags']) %>
         </td>
       </tr>
       <tr>
         <td>
-          <a href='list.plain?tags=<%= params['tags'] %>'>
-            Text
-          </a>
+          <%= link_to 'Text', list_sources_path(format: :plain, tags: params['tags']) %>
         </td>
       </tr>
     </table>
