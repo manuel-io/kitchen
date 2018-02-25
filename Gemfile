@@ -10,6 +10,7 @@ gem 'mini_magick'
 gem 'oath'
 gem 'oath-generators'
 gem 'rails-i18n'
+gem 'validates_email_format_of'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

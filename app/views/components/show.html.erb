@@ -1,9 +1,7 @@
 <nav>
-  <h3><%= @component.recipe.title %></h3>
-  <h4><%= @component.title %></h4>
-  <%= link_to 'Back', components_path %> |
-  <%= link_to 'Edit', edit_component_path(@component) %> |
-  <%= link_to 'Add', new_component_ingredient_path(@component) %>
+  <%= link_to t(:index), components_path(anchor: @component.recipe.id) %> |
+  <%= link_to t(:edit), edit_component_path(@component) %> |
+  <%= link_to t(:ingredient_new), new_component_ingredient_path(@component) %>
 </nav>
 
 <aside>
@@ -12,13 +10,22 @@
     <p id="notice"><%= notice %></p>
   </section>
   <% end %>
+
+  <section>
+    <h3><%= @component.recipe.title %></h3>
+    <h4><%= @component.title %></h4>
+  </section>
+
+  <section>
+    <p><%= @component.description %></p>
+  </section>
 </aside>
 
 <article>
   <h2>Ingredients</h2>
   <% @component.ingredients.order(unit: :desc, amount: :asc).each do |value| %>
     <section>
-      <h3><%= value.name %></h3>
+      <h3><%= value.title %></h3>
       <table>
         <tr>
           <th><% if product = value.product %><%= link_to product.title, product_path(product.id), class: 'shop' %><% end %></th>

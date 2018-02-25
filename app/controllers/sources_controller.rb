@@ -10,11 +10,6 @@ class SourcesController < ApplicationController
     @sources = Source.all
   end
 
-  # GET /sources/1
-  # GET /sources/1.json
-  def show
-  end
-
   # GET /sources/new
   def new
     @source = Source.new
@@ -32,11 +27,9 @@ class SourcesController < ApplicationController
 
     respond_to do |format|
       if @source.save
-        format.html { redirect_to @source, notice: 'Source was successfully created.' }
-        format.json { render :show, status: :created, location: @source }
+        format.html { redirect_to sources_path, notice: 'Source was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @source.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,11 +39,9 @@ class SourcesController < ApplicationController
   def update
     respond_to do |format|
       if @source.update(source_params)
-        format.html { redirect_to @source, notice: 'Source was successfully updated.' }
-        format.json { render :show, status: :ok, location: @source }
+        format.html { redirect_to sources_path, notice: 'Source was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @source.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,7 +52,6 @@ class SourcesController < ApplicationController
     @source.destroy
     respond_to do |format|
       format.html { redirect_to sources_url, notice: 'Source was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -96,6 +86,6 @@ class SourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def source_params
-      params.require(:source).permit(:name, :url, :recipe_id)
+      params.require(:source).permit(:title, :url, :recipe_id)
     end
 end

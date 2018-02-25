@@ -1,13 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
-  helper_method :a
 
   include Oath::ControllerHelpers
   protect_from_forgery with: :exception
-
-  def a(string)
-    CGI.escape string
-  end
 
   def require_login
     unless signed_in?

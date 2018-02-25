@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to 'Back', recipes_path %>
+  <%= link_to t(:index), recipes_path %>
 </nav>
 
 <aside>
@@ -8,7 +8,6 @@
     <% @recipe.errors.full_messages.each do |message| %>
       <p><%= message %><p>
     <% end %>
-      </ul>
   </section>
   <% end %>
 </aside>

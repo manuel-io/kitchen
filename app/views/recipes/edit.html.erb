@@ -1,6 +1,6 @@
 <nav>
   <h3><%= @recipe.title %></h3>
-  <%= link_to t(:index), recipes_path(anchor: @recipe.id) %>
+  <%= link_to t(:index), recipes_path(anchor: @recipe.id) %> |
   <%= link_to t(:details), @recipe %>
 </nav>
 
@@ -10,7 +10,6 @@
     <% @recipe.errors.full_messages.each do |message| %>
       <p><%= message %><p>
     <% end %>
-      </ul>
   </section>
   <% end %>
   <section>

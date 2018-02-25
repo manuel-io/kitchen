@@ -1,5 +1,18 @@
+<nav>
+  <%= link_to t(:index), sources_path %>
+</nav>
+
+<aside>
+  <% if @source.errors.any? %>
+  <section class='error'>
+    <% @source.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
 <article>
   <h2>New Source</h2>
   <%= render 'form', source: @source %>
-  <%= link_to 'Back', sources_path %>
 </article>

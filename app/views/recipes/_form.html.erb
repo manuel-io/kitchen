@@ -3,12 +3,12 @@
 
   <div class="field">
     <%= f.label t(:title) %>
-    <%= f.text_field :title, autofocus: true %>
+    <%= f.text_field :title, autofocus: true, require: true %>
   </div>
 
   <div class="field">
     <%= f.label t(:description) %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, require: true %>
   </div>
 
 </fieldset>

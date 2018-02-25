@@ -75,14 +75,14 @@
   <h2><%= t(:list) %></h2>
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
-    <section>
+    <section id='<%= value.id %>'>
       <h3 class='recipe'><%= value.title %></h3>
       <p><%= value.description %></p>
       <% value.sources[0...-1].each do |source| %>
-        <a href='<%= source.url %>'><%= source.name %></a>,
+        <a href='<%= source.url %>'><%= source.title %></a>,
       <% end %>
       <% source = value.sources.last %>
-      <a href='<%= source.url %>'><%= source.name %></a>
+      <a href='<%= source.url %>'><%= source.title %></a>
     <% end %>
     </section>
   <% end %>

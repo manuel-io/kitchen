@@ -1,6 +1,6 @@
 <nav>
   <h3><%= @product.title %></h3>
-  <%= link_to t(:index), products_path(anchor: @product.id) %>
+  <%= link_to t(:index), products_path(anchor: @product.id) %> |
   <%= link_to t(:details), @product %>
 </nav>
 

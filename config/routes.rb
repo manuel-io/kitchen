@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
   resources :products
-  resources :sources do
+  resources :sources, except: [:show] do
     get 'list', on: :collection
   end
 
@@ -11,9 +10,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, only: [:new, :create, :edit, :update, :destroy] do
-      patch :email, on: :member
-      patch :password, on: :member
+    resources :users, only: [:new, :create, :edit, :destroy] do
+      patch :update_nick, on: :member
+      patch :update_email, on: :member
+      patch :update_password, on: :member
     end
     root 'overview#index'
   end
@@ -21,10 +21,10 @@ Rails.application.routes.draw do
   resources :recipes do
     get 'show_picture', on: :collection
   end
+
   resources :components do
     resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
   end
 
   root 'sources#list'
-  # root 'sources#list', defaults: { format: 'markdown' }
 end

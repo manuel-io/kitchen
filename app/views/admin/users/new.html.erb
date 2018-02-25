@@ -18,7 +18,7 @@
 <article>
   <h2><%= t(:user_new) %></h2>
 
-  <%= form_for @user, url: admin_users_path do |form| %>
+  <%= form_for [:admin, @user] do |form| %>
 
   <fieldset>
     <legend>Personalia</legend>
@@ -35,8 +35,8 @@
       <%= form.email_field :email, placeholder: 'mail@exmaple.com', require: true %>
     </div>
     <div>
-      <%= form.label :email_verify %>
-      <%= form.email_field :email_verify, require: true %>
+      <%= form.label :email_confirmation %>
+      <%= form.email_field :email_confirmation, require: true %>
     </div>
   </fieldset>
 
@@ -47,8 +47,8 @@
       <%= form.password_field :password, placeholder: '********', require: true %>
     </div>
     <div>
-      <%= form.label :password_verfiy %>
-      <%= form.password_field :password_verify, require: true %>
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, require: true %>
     </div>
   </fieldset>
     

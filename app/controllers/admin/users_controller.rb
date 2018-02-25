@@ -1,15 +1,13 @@
 class Admin::UsersController < AdminController
-  before_action :set_source, only: [:show, :edit, :update, :destroy, :email, :password]
+  before_action :set_source, only: [:show, :edit, :destroy, :update_nick, :update_email, :update_password]
 
   def new
     @user = User.new
   end
 
   def create
-    @user = sign_up(user_params)
-
-    if @user.valid?
-      sign_in(@user)
+    @user = User.new(user_params)
+    if @user.save
       redirect_to admin_root_path
     else
       render :new
@@ -19,31 +17,27 @@ class Admin::UsersController < AdminController
   def edit
   end
 
-  def update
-    if @user.update_attributes nick: params[:user][:nick]
-      redirect_to admin_root_path
-    end
-  end
-
-  def email
-    if params[:user][:email] == params[:user][:email_verify]
-      if @user.update_attribute :email, params[:user][:email]
-        redirect_to admin_root_path, notice: 'Email was successfully updated.'
-      else
+  def update_nick
+      if @user.update(nick_params)
         redirect_to admin_root_path
+      else
+        render :edit
       end
+  end
+
+  def update_email
+    if @user.update(email_params)
+      redirect_to admin_root_path, notice: 'Email was successfully updated.'
     else
-      redirect_to :back, alert: 'Email does not comply to verification.'
+      render :edit
     end
   end
 
-  def password
-    if params[:user][:password_digest] == params[:user][:password_verify]
-      digest = reset_password @user, params[:user][:password_digest]
-      @user.update_attribute :password_digest, digest
+  def update_password
+    if @user.update(password_params)
       redirect_to admin_root_path, notice: 'Password was successfully updated.'
     else
-      redirect_to :back, alert: 'Password does not comply to verification.'
+      render :edit
     end
   end
 
@@ -51,7 +45,6 @@ class Admin::UsersController < AdminController
     @user.destroy
     respond_to do |format|
       format.html { redirect_to admin_root_path, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
   
@@ -62,6 +55,18 @@ class Admin::UsersController < AdminController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :nick)
+    params.require(:user).permit(:email, :email_confirmation, :password, :password_confirmation, :nick)
+  end
+
+  def nick_params
+    params.require(:user).permit(:nick)
+  end
+
+  def email_params
+    params.require(:user).permit(:email, :email_confirmation)
+  end
+
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

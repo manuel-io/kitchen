@@ -1,7 +1,6 @@
 <nav>
-  <%= link_to 'Back', recipes_path %> |
-  <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-  <%= link_to 'Add', new_recipe_path %>
+  <%= link_to t(:index), recipes_path(anchor: @recipe.id) %> |
+  <%= link_to t(:edit), edit_recipe_path(@recipe) %>
 </nav>
 
 <aside>
@@ -22,7 +21,7 @@
     <% component.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
       <tr>
         <td><%= ingredient.amount %> <%= ingredient.unit %></td>
-        <td><%= ingredient.name %></td>
+        <td><%= ingredient.title %></td>
       </tr>
     <% end %>
     </table>
@@ -52,7 +51,7 @@
   <footer>
     <h3>Quellen</h3>
     <% @recipe.sources.each do |source| %>
-      <p><a href='<%= source.url %>'><%= source.name %></a></p>
+      <p><a href='<%= source.url %>'><%= source.title %></a></p>
       <div class='print'>
         <span>- <%= source.url %></span>
         <br />

@@ -1,18 +1,26 @@
 <%= form_for([@component, @ingredient]) do |f| %>
+<fieldset>
+
   <div class="field">
     <%= f.label :amount %>
-    <%= f.number_field :amount, step: 0.125, autofocus: true %>
+    <%= f.number_field :amount, step: 0.125, autofocus: true, require: true %>
   </div>
 
   <div class="field">
     <%= f.label :unit %>
-    <%= f.text_field :unit %>
+    <%= f.text_field :unit, require: true %>
   </div>
 
+</fieldset>
+<fieldset>
+
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :title %>
+    <%= f.text_field :title, require: true %>
   </div>
+
+</fieldset>
+<fieldset>
 
   <div class="field">
     <%= f.select(:product_id) do %>
@@ -21,7 +29,12 @@
     <% end %>
   </div>
 
+</fieldset>
+<fieldset>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:ingredient_save) %>
   </div>
+
+</fieldset>
 <% end %>

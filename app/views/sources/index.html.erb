@@ -1,6 +1,6 @@
 <nav>
-<%= link_to t(:new_source), new_source_path %> |
-<%= link_to t(:list), list_sources_path %>
+  <%= link_to t(:new_source), new_source_path %> |
+  <%= link_to t(:list), list_sources_path %>
 </nav>
 
 <aside>
@@ -15,14 +15,13 @@
   <h2><%= t(:sources) %></h2>
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
-    <section>
+    <section id='<%= value.id %>'>
       <h3 class='recipe'><%= value.title %></h3>
         <table>
         <% value.sources.each do |source| %>
           <tbody>
             <tr>
-              <th><%= source.name %></th>
-              <td><%= link_to 'Show', source %></td>
+              <th><%= source.title %></th>
               <td><%= link_to 'Edit', edit_source_path(source) %></td>
               <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>

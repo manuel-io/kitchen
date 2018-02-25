@@ -2,21 +2,25 @@
 
   <fieldset>
     <legend><%= t(:product_info) %></legend>
+
     <div class="field">
       <%= f.label t(:manufacturer) %>
-      <%= f.text_field :manufacturer %>
+      <%= f.text_field :manufacturer, require: true %>
     </div>
+
     <div class="field">
       <%= f.label t(:shop) %>
       <%= f.text_field :shop %>
     </div>
+
     <div class="field">
       <%= f.label t(:code) %>
       <%= f.text_field :code %>
     </div>
+
     <div class="field">
       <%= f.label t(:title) %>
-      <%= f.text_field :title, autofocus: true %>
+      <%= f.text_field :title, autofocus: true, require: true %>
     </div>
   </fieldset>
 
@@ -33,12 +37,12 @@
     <div class="field">
       <% unit = if product.liquid then 'ml' else 'g' end %>
       <%= f.label t(:amount) %>
-      <%= f.number_field :amount %><span class='unit'><%= unit %></span>
+      <%= f.number_field :amount, require: true %><span class='unit'><%= unit %></span>
     </div>
 
     <div class="field">
       <%= f.label t(:price) %>
-      <%= f.number_field :price, step: 0.01 %>
+      <%= f.number_field :price, require: true, step: 0.01 %>
     </div>
   </fieldset>
 

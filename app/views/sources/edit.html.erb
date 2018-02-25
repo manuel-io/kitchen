@@ -1,9 +1,19 @@
+<nav>
+  <%= link_to t(:index), sources_path(anchor: @source.recipe.id) %> |
+  <%= link_to t(:details), @source %>
+</nav>
+
+<aside>
+  <% if @source.errors.any? %>
+  <section class='error'>
+    <% @source.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
 <article>
   <h2>Editing Source</h2>
   <%= render 'form', source: @source %>
 </article>
-
-<aside>
-<%= link_to 'Show', @source %> |
-<%= link_to 'Back', sources_path %>
-</aside>
