@@ -8,7 +8,6 @@ class Ingredient < ApplicationRecord
   end
 
   belongs_to :component
-  belongs_to :product
 
   validates :component, presence: true
   validates :product, presence: true
