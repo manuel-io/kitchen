@@ -1,0 +1,2 @@
+module RecipePartsHelper
+end

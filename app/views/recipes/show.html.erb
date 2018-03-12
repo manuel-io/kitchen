@@ -14,17 +14,21 @@
     <%= image_tag url_for(controller: "recipes", action: "show_picture", id: @recipe.id) %>
   </section>
   
-  <% @recipe.components.order(title: :asc).each do |component| %>
+  <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
   <section>
+  <% if component.part_type == 'Connection' %>
+    <h3><%= component.title %></h3>
+  <% else %>
     <h3><%= component.title %></h3>
     <table>
-    <% component.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
+    <% component.part.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
       <tr>
         <td><%= ingredient.amount %> <%= ingredient.unit %></td>
         <td><%= ingredient.title %></td>
       </tr>
     <% end %>
     </table>
+  <% end %>
   </section>
   <% end %>
 </aside>
@@ -37,15 +41,22 @@
     <p><strong><%= t(:made) %>:</strong> <%= @recipe.last %></p>
     <p><strong><%= t(:serves) %>:</strong> <%= @recipe.serves %></p>
     <p id='description'><%= @recipe.description %></p>
- </header>
+  </header>
 
- <section class='body'>
-  <% @recipe.components.order(title: :asc).each do |component| %>
-    <% unless component.description.empty? %>
-    <h3><%= component.title  %></h3>
-    <p><%= markdown(component.description) %></p>
-   <% end %>
-  <% end %>
+  <section class='body'>
+    <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
+      <% if component.part_type == 'Connection' %>
+        <h3><%= component.title  %></h3>
+        <p><%= link_to 'Hier geht es zum Rezept', recipe_path(component.part.child.id)  %></p>
+      <% else %>
+
+        <% unless component.description.empty? %>
+          <h3><%= component.title  %></h3>
+          <p><%= markdown(component.description) %></p>
+        <% end %>
+
+      <% end %>
+    <% end %>
   </section>
 
   <footer>

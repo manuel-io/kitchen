@@ -1,0 +1,41 @@
+<nav>
+  <h3><%= @recipe_part.recipe.title %></h3>
+  <h4><%= @recipe_part.title %></h4>
+  <%= link_to t(:index), recipe_parts_path(anchor: @recipe_part.recipe.id) %>
+  <%= link_to t(:details), @recipe_part.part %>
+</nav>
+
+<aside>
+  <% if @recipe_part.errors.any? %>
+  <section class='error'>
+    <% @recipe_part.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t(:component_update) %> </h2>
+  <%= form_for(@recipe_part) do |f| %>
+  <fieldset>
+    <legend><%= t(:description) %></legend>
+    <div class="field">
+      <%= f.label t(:title) %>
+      <%= f.text_field :title, autofocus: true, require: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label t(:guidance) %>
+      <%= f.text_area :description %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="actions">
+      <%= f.submit t(:component_save) %>
+    </div>
+  </fieldset>
+
+  <% end %>
+</article>

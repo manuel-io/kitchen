@@ -1,60 +1,10 @@
 class ComponentsController < ApplicationController
   before_action :require_login
-  before_action :set_component, only: [:show, :edit, :update, :destroy]
-
-  # GET /components
-  # GET /components.json
-  def index
-    @recipes = Recipe.all.order(title: :asc)
-  end
+  before_action :set_component, only: [:show]
 
   # GET /components/1
   # GET /components/1.json
   def show
-  end
-
-  # GET /components/new
-  def new
-    @component = Component.new
-  end
-
-  # GET /components/1/edit
-  def edit
-  end
-
-  # POST /components
-  # POST /components.json
-  def create
-    @component = Component.new(component_params)
-
-    respond_to do |format|
-      if @component.save
-        format.html { redirect_to @component, notice: 'Component was successfully created.' }
-      else
-        format.html { render :new }
-      end
-    end
-  end
-
-  # PATCH/PUT /components/1
-  # PATCH/PUT /components/1.json
-  def update
-    respond_to do |format|
-      if @component.update(component_params)
-        format.html { redirect_to @component, notice: 'Component was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-
-  # DELETE /components/1
-  # DELETE /components/1.json
-  def destroy
-    @component.destroy
-    respond_to do |format|
-      format.html { redirect_to components_url, notice: 'Component was successfully destroyed.' }
-    end
   end
 
   private
@@ -65,6 +15,6 @@ class ComponentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def component_params
-      params.require(:component).permit(:title, :description, :recipe_id)
+      params.require(:component).permit(:description)
     end
 end

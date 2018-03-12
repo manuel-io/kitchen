@@ -20,5 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  connection: "Rezept"
   hello: "Hello world"
   tags_descc: "Tags separated with a comma"
+  vegetable: "Vegetable"

@@ -1,34 +1,34 @@
-<%= form_for(recipe) do |f| %>
+<%= form_for(recipe) do |form| %>
 <fieldset>
 
   <div class="field">
-    <%= f.label t(:title) %>
-    <%= f.text_field :title, autofocus: true, require: true %>
+    <%= form.label t(:title) %>
+    <%= form.text_field :title, autofocus: true, require: true %>
   </div>
 
   <div class="field">
-    <%= f.label t(:description) %>
-    <%= f.text_area :description, require: true %>
+    <%= form.label t(:description) %>
+    <%= form.text_area :description, require: true %>
   </div>
 
 </fieldset>
 <fieldset>
 
   <div class="field">
-    <%= f.label t(:serves) %>
-    <%= f.number_field :serves %>
+    <%= form.label t(:serves) %>
+    <%= form.number_field :serves %>
   </div>
 
   <div class="field">
-    <%= f.label t(:made) %>
-    <%= f.date_select :last %>
+    <%= form.label t(:made) %>
+    <%= form.date_select :last %>
   </div>
 
 </fieldset>
 <fieldset>
 
   <div class="field">
-    <%= f.file_field :picture, accept: 'image/jpeg', multiple: false %>
+    <%= form.file_field :picture, accept: 'image/jpeg', multiple: false %>
   </div>
 
 </fieldset>
@@ -36,14 +36,14 @@
   <legend><%= t(:tags) %></legend>
 
   <div class="field">
-    <%= f.text_field :all_tags, placeholder: t(:tags_desc) %> 
+    <%= form.text_field :all_tags, placeholder: t(:tags_desc) %> 
   </div>
 
 </fieldset>
 <fieldset>
 
   <div class="actions">
-    <%= f.submit t(:recipe_save) %>
+    <%= form.submit t(:recipe_save) %>
   </div>
 
 </fieldset>

@@ -1,7 +1,8 @@
-class Component < ApplicationRecord
+class Connection < ApplicationRecord
   has_one :recipe_part, as: :part
   has_one :recipe, through: :recipe_part
-  has_many :ingredients, dependent: :destroy
+
+  belongs_to :child, class_name: 'Recipe', foreign_key: 'child_id'  
 
   def title
     self.recipe_part.title

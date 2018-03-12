@@ -1,0 +1,19 @@
+<nav>
+  <%= link_to t(:index), recipe_parts_path(anchor: @connection.recipe.id) %> |
+  <%= link_to t(:details), @connection %>
+</nav>
+
+<aside>
+  <% if @connection.errors.any? %>
+  <section class='error'>
+    <% @connection.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2>Editing Recipe</h2>
+  <%= render 'form', connection: @connection %>
+</article>

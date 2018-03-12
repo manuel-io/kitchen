@@ -1,0 +1,35 @@
+<nav>
+  <%= link_to t(:new_component), new_recipe_part_path %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t :components %></h2>
+  <% @recipes.each do |recipe| %>
+  <section id='<%= recipe.id %>'>
+    <h3 class='recipe'><%= recipe.title %></h3>
+      <% recipe.recipe_parts.order(:title).each do |component| %>
+      <table>
+        <tr>
+          <th><%= component.title %></th>
+          <th><%= t(component.part_type.downcase) %></th>
+          <% if component.part_type == 'Connection' %>
+            <td><%= link_to 'Show', connection_path(component.part) %></td>
+          <% else %>
+            <td><%= link_to 'Show', component_path(component.part) %></td>
+          <% end %>
+          <td><%= link_to 'Edit', edit_recipe_part_path(component) %></td>
+          <td><%= link_to 'Destroy', component, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      </table>
+      <% end %>
+    </section>
+  <% end %>
+</article>

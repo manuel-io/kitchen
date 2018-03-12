@@ -1,0 +1,76 @@
+<nav>
+  <%= link_to t(:index), recipe_parts_path %>
+</nav>
+
+<aside>
+  <% if @recipe_part.errors.any? %>
+  <section class='error'>
+    <% @recipe_part.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+
+  <% if alert %>
+  <section class='alert'>
+    <% alert.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t(:component_new) %></h2>
+  <%= form_for(@recipe_part) do |f| %>
+  <fieldset>
+    <legend><%= t(:description) %></legend>
+    <div class="field">
+      <%= f.label t(:title) %>
+      <%= f.text_field :title, autofocus: true, require: true %>
+    </div>
+
+    <div id='guidance' class="field">
+      <%= f.label t(:guidance) %>
+      <%= f.text_area :description %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Type</legend>
+    <div class="field">
+    <%= f.select(:part) do %>
+      <% parts = Recipe.parts.map { |value| [t(value.class_name), value.name] } %>
+      <%= options_for_select(parts, selected: @recipe_part.part_id) %>
+    <% end %>
+    </div>
+  </fieldset>
+
+  <fieldset id='connection'>
+    <legend>Connection</legend>
+    <div class="field">
+      <%= f.select(:child_id) do %>
+        <% recipes = Recipe.order(title: :asc).map { |value| [value.title, value.id] } %>
+        <%= options_for_select(recipes) %>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><%= t(:recipe) %></legend>
+    <div class="field">
+    <%= f.select(:recipe_id) do %>
+      <% recipes = Recipe.order(created_at: :desc).map { |value| [value.title, value.id] } %>
+      <%= options_for_select(recipes, selected: @recipe_part.recipe_id) %>
+    <% end %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="actions">
+      <%= f.submit t(:component_save) %>
+    </div>
+  </fieldset>
+
+  <% end %>
+</article>

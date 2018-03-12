@@ -33,7 +33,7 @@
           <li><%= link_to t(:products), products_path %></li>
           <li><%= link_to t(:recipes), recipes_path %></li>
         <% if signed_in? %>
-          <li><%= link_to t(:components), components_path %></li>
+          <li><%= link_to t(:components), recipe_parts_path %></li>
         <% end %>
           <li><%= link_to t(:sources), sources_path %></li>
         <% if not signed_in? %>

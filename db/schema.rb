@@ -10,18 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225004806) do
+ActiveRecord::Schema.define(version: 20180308224705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "components", id: :serial, force: :cascade do |t|
-    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "recipe_id"
-    t.text "description"
-    t.index ["recipe_id"], name: "index_components_on_recipe_id"
+  end
+
+  create_table "connections", force: :cascade do |t|
+    t.bigint "child_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_connections_on_child_id"
   end
 
   create_table "ingredients", id: :serial, force: :cascade do |t|
@@ -80,6 +83,18 @@ ActiveRecord::Schema.define(version: 20180225004806) do
     t.string "code"
   end
 
+  create_table "recipe_parts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "recipe_id"
+    t.string "part_type"
+    t.bigint "part_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["part_type", "part_id"], name: "index_recipe_parts_on_part_type_and_part_id"
+    t.index ["recipe_id"], name: "index_recipe_parts_on_recipe_id"
+  end
+
   create_table "recipes", id: :serial, force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -124,6 +139,8 @@ ActiveRecord::Schema.define(version: 20180225004806) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "connections", "recipes", column: "child_id"
+  add_foreign_key "recipe_parts", "recipes"
   add_foreign_key "sources", "recipes"
   add_foreign_key "taggings", "recipes"
   add_foreign_key "taggings", "tags"

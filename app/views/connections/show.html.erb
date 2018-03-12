@@ -1,0 +1,30 @@
+<nav>
+  <%= link_to t(:index), recipe_parts_path(anchor: @connection.recipe.id) %> |
+  <%= link_to t(:edit), edit_recipe_part_path(@connection.recipe_part) %> |
+  <%= link_to t(:connection), edit_connection_path(@connection) %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+
+  <section>
+    <h3><%= @connection.recipe.title %></h3>
+    <h4><%= @connection.title %></h4>
+  </section>
+</aside>
+
+<article>
+  <p>
+    <strong>Title:</strong>
+    <%= @connection.title %>
+  </p>
+
+  <p>
+    <strong>Connection:</strong>
+    <%= @connection.child.title %>
+  </p>
+</article>

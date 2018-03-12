@@ -12,7 +12,7 @@
   <section>
   <div id='kitcat'>
   <% @ids.each do |id| %>
-    <%= image_tag url_for(controller: "recipes", action: "show_picture", id: id) %>
+    <%= image_tag show_picture_recipes_path(id: id) %>
   <% end %>
   </div>
   </section>

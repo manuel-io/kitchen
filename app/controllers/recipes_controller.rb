@@ -34,13 +34,11 @@ class RecipesController < ApplicationController
         t.picture = image.to_blob if image.valid?
       end
     end
-
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    
+    if @recipe.save
+      redirect_to @recipe, notice: 'Recipe was successfully created.'
+    else
+      render :new
     end
   end
 

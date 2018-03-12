@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :connections
+  resources :recipe_parts, except: [:show]
+  resources :component_parts
   resources :products
   resources :sources, except: [:show] do
     get 'list', on: :collection
@@ -22,8 +25,8 @@ Rails.application.routes.draw do
     get 'show_picture', on: :collection
   end
 
-  resources :components do
-    resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
+  resources :components, only: [:show] do
+    resources :ingredients, except: [:index, :show]
   end
 
   root 'sources#list'

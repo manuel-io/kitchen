@@ -1,6 +1,6 @@
 <nav>
-  <%= link_to t(:index), components_path(anchor: @component.recipe.id) %> |
-  <%= link_to t(:edit), edit_component_path(@component) %> |
+  <%= link_to t(:index), recipe_parts_path(anchor: @component.recipe.id) %> |
+  <%= link_to t(:edit), edit_recipe_part_path(@component.recipe_part) %> |
   <%= link_to t(:ingredient_new), new_component_ingredient_path(@component) %>
 </nav>
 

@@ -1,7 +1,7 @@
 <nav>
   <h3><%= @ingredient.component.recipe.title %></h3>
   <h4><%= @ingredient.component.title %></h4>
-  <%= link_to t(:index), components_path(anchor: @component.recipe.id) %> |
+  <%= link_to t(:index), recipe_parts_path(anchor: @component.recipe.id) %> |
   <%= link_to t(:details), @component %>
 </nav>
 
