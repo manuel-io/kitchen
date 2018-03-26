@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :ingredients
 
-  validates :title, presence: true, length: { minimum: 1 }, uniqueness: { scope: :manufacturer }
+  validates :title, presence: true, uniqueness: { scope: :manufacturer }
   validates :manufacturer, presence: true
   validates :amount, presence: true,  numericality: { only_integer: true, greater_than: 0 }
   validates :price, presence: true,  numericality: { greater_than: 0 }

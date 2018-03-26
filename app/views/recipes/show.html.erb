@@ -40,6 +40,8 @@
     <h2><%= @recipe.title %></h2>
     <p><strong><%= t(:made) %>:</strong> <%= @recipe.last %></p>
     <p><strong><%= t(:serves) %>:</strong> <%= @recipe.serves %></p>
+    <p><strong><%= t(:price) + ' ' + t(:per_serving) %>:</strong> <%= @recipe.price_per_serving %> €</p>
+    <p><strong><%= t(:price) + ' ' + t(:in_total) %>:</strong> <%= @recipe.price_in_total %> €</p>
     <p id='description'><%= @recipe.description %></p>
   </header>
 
@@ -47,10 +49,10 @@
     <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
       <% if component.part_type == 'Connection' %>
         <h3><%= component.title  %></h3>
-        <p><%= link_to 'Hier geht es zum Rezept', recipe_path(component.part.child.id)  %></p>
+        <p><%= markdown(component.description.to_s) + ' ' + link_to('Hier geht es zum Rezept', recipe_path(component.part.child.id)) %></p>
       <% else %>
 
-        <% unless component.description.empty? %>
+        <% unless component.description.to_s.empty? %>
           <h3><%= component.title  %></h3>
           <p><%= markdown(component.description) %></p>
         <% end %>

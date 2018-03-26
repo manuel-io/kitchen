@@ -23,9 +23,9 @@
 <fieldset>
 
   <div class="field">
-    <%= f.select(:product_id) do %>
+    <%= f.select(:adding_id) do %>
     <% products = Product.order(title: :asc).map { |value| [value.title, value.id] } %>
-    <%= options_for_select(products, selected: ingredient.product_id) %>
+    <%= options_for_select(products, selected: ingredient.adding_id) %>
     <% end %>
   </div>
 
@@ -37,4 +37,5 @@
   </div>
 
 </fieldset>
+
 <% end %>

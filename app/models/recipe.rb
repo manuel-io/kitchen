@@ -3,16 +3,24 @@ class Recipe < ApplicationRecord
   has_many :connections, through: :recipe_parts, source: :part, source_type: 'connection'
   has_many :components, through: :recipe_parts, source: :part, source_type: 'component'
 
-# has_many :vegetables, through: :recipe_parts, source: :part, source_type: 'vegetable'
-# has_many :ingredients, through: :recipe_parts, source: :part, source_type: 'ingredient'
-# has_many :seasonings, through: :recipe_parts, source: :part, source_type: 'seasoning'
-
   has_many :sources, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :description, presence: true
+
+  def total
+    self.recipe_parts.inject(0) { |sum, poly| sum + poly.part.total }
+  end
+
+  def price_in_total
+    ('%.2f' % total).sub('.', ',')
+  end
+
+  def price_per_serving
+    ('%.2f' % (total / self.serves)).sub('.', ',')
+  end
 
   def tags_by_name(names)
    self

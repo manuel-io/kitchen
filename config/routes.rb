@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :vegetables
+  resources :seasonnings
   resources :connections
   resources :recipe_parts, except: [:show]
   resources :component_parts

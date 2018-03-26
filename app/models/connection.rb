@@ -8,6 +8,10 @@ class Connection < ApplicationRecord
     self.recipe_part.title
   end
 
+  def total
+    self.child.total
+  end
+
   def description
     self.recipe_part.description
   end

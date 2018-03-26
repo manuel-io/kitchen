@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @seasonning.title %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @seasonning.amount %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @seasonning.price %>
+</p>
+
+<%= link_to 'Edit', edit_seasonning_path(@seasonning) %> |
+<%= link_to 'Back', seasonnings_path %>

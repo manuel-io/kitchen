@@ -5,7 +5,7 @@ ready = () ->
       $('#guidance').css('display', 'block')
     if $('#recipe_part_part option:selected').val() == 'connections'
       $('#connection').css('display', 'block')
-      $('#guidance').css('display', 'none')
+      $('#guidance').css('display', 'block')
 
 $(document).on 'turbolinks:load', () ->
   $('#guidance').css('display', 'none')

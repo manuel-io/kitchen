@@ -16,8 +16,14 @@ class IngredientsController < ApplicationController
   # POST /ingredients
   # POST /ingredients.json
   def create
+    adding = Product.find(params[:ingredient][:adding_id])
     @component = Component.find(params[:component_id])
-    @ingredient = @component.ingredients.create(ingredient_params)
+
+    @ingredient = @component.ingredients.build(ingredient_params.merge(adding: adding))
+    
+    unless @ingredient.valid?
+      p @ingredient
+    end
 
     respond_to do |format|
       if @ingredient.save
@@ -31,8 +37,10 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
+    adding = Product.find(params[:ingredient][:adding_id])
+
     respond_to do |format|
-      if @ingredient.update(ingredient_params)
+      if @ingredient.update(ingredient_params.merge(adding: adding))
         format.html { redirect_to component_path(@component), notice: 'Ingredient was successfully updated.' }
       else
         format.html { render :edit }
@@ -59,6 +67,6 @@ class IngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_params
-      params.require(:ingredient).permit(:amount, :unit, :title, :component_id, :product_id)
+      params.require(:ingredient).permit(:amount, :unit, :title, :component_id, :adding_id)
     end
 end

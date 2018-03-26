@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308224705) do
+ActiveRecord::Schema.define(version: 20180320173747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 20180308224705) do
   create_table "components", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "adding_type"
+    t.bigint "adding_id"
+    t.index ["adding_type", "adding_id"], name: "index_components_on_adding_type_and_adding_id"
   end
 
   create_table "connections", force: :cascade do |t|
@@ -35,6 +38,9 @@ ActiveRecord::Schema.define(version: 20180308224705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_id"
+    t.string "adding_type"
+    t.bigint "adding_id"
+    t.index ["adding_type", "adding_id"], name: "index_ingredients_on_adding_type_and_adding_id"
     t.index ["component_id"], name: "index_ingredients_on_component_id"
     t.index ["product_id"], name: "index_ingredients_on_product_id"
   end
@@ -105,6 +111,14 @@ ActiveRecord::Schema.define(version: 20180308224705) do
     t.integer "serves"
   end
 
+  create_table "seasonnings", force: :cascade do |t|
+    t.string "title"
+    t.decimal "amount"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sources", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -137,6 +151,14 @@ ActiveRecord::Schema.define(version: 20180308224705) do
     t.datetime "updated_at", null: false
     t.string "nick"
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "vegetables", force: :cascade do |t|
+    t.string "title"
+    t.decimal "amount"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "connections", "recipes", column: "child_id"

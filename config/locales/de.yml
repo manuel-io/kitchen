@@ -1,4 +1,5 @@
 de:
+  and:             "und"
   amount:          "Menge"
   code:            "Barcode"
   component_new:   "Neue Komponente"
@@ -13,6 +14,7 @@ de:
   details:         "Details"
   edit:            "Bearbeiten"
   guidance:        "Anleitung"
+  in_total:        "insgesamt"
   index:           "Übersicht"
   ingredient_new:  "Hinzufügen"
   ingredient_save: "Speichern"
@@ -30,6 +32,7 @@ de:
   nutritionals:    "Nährwerte"
   serves:          "Portionen"
   password:        "Passwort"
+  per_serving:     "pro Portion"
   price:           "Preis"
   product:         "Produkt"
   product_info:    "Produktinformationen"

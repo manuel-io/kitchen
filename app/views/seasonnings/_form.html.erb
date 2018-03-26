@@ -1,0 +1,32 @@
+<%= form_with(model: seasonning, local: true) do |form| %>
+  <% if seasonning.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(seasonning.errors.count, "error") %> prohibited this seasonning from being saved:</h2>
+
+      <ul>
+      <% seasonning.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :seasonning_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, id: :seasonning_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :seasonning_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

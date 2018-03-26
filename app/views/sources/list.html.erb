@@ -78,6 +78,9 @@
     <section id='<%= value.id %>'>
       <h3 class='recipe'><%= value.title %></h3>
       <p><%= value.description %></p>
+      <% values = [ value.price_per_serving, t(:per_serving), t(:and),
+                    value.price_in_total, t(:in_total) ] %>
+      <p><%= '%s € %s %s %s € %s' % values %></p>
       <% value.sources[0...-1].each do |source| %>
         <a href='<%= source.url %>'><%= source.title %></a>,
       <% end %>
