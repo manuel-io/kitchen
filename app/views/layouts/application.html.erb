@@ -30,6 +30,7 @@
         </ul>
         <% end %>
         <ul>
+          <li><%= link_to t(:vegetables), vegetables_path %></li>
           <li><%= link_to t(:products), products_path %></li>
           <li><%= link_to t(:recipes), recipes_path %></li>
         <% if signed_in? %>

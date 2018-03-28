@@ -1,5 +1,13 @@
-<p id="notice"><%= notice %></p>
+<nav>
+<%= link_to 'Edit', edit_vegetable_path(@vegetable) %> |
+<%= link_to 'Back', vegetables_path %>
+</nav>
 
+<aside>
+<p id="notice"><%= notice %></p>
+</aside>
+
+<article>
 <p>
   <strong>Title:</strong>
   <%= @vegetable.title %>
@@ -14,6 +22,4 @@
   <strong>Price:</strong>
   <%= @vegetable.price %>
 </p>
-
-<%= link_to 'Edit', edit_vegetable_path(@vegetable) %> |
-<%= link_to 'Back', vegetables_path %>
+</article>

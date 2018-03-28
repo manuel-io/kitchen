@@ -4,7 +4,7 @@ class VegetablesController < ApplicationController
   # GET /vegetables
   # GET /vegetables.json
   def index
-    @vegetables = Vegetable.all
+    @vegetables = Vegetable.order(title: :asc)
   end
 
   # GET /vegetables/1
@@ -69,6 +69,6 @@ class VegetablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vegetable_params
-      params.require(:vegetable).permit(:title, :amount, :price)
+      params.require(:vegetable).permit(:title, :price)
     end
 end

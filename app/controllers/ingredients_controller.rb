@@ -16,7 +16,11 @@ class IngredientsController < ApplicationController
   # POST /ingredients
   # POST /ingredients.json
   def create
-    adding = Product.find(params[:ingredient][:adding_id])
+    adding = case params[:ingredient][:uid]
+      when /Vegetable(\d+)/ then Vegetable.find($1)
+      when /Product(\d+)/ then Product.find($1)
+    end
+
     @component = Component.find(params[:component_id])
 
     @ingredient = @component.ingredients.build(ingredient_params.merge(adding: adding))
@@ -37,7 +41,10 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
-    adding = Product.find(params[:ingredient][:adding_id])
+    adding = case params[:ingredient][:uid]
+      when /Vegetable(\d+)/ then Vegetable.find($1)
+      when /Product(\d+)/ then Product.find($1)
+    end
 
     respond_to do |format|
       if @ingredient.update(ingredient_params.merge(adding: adding))

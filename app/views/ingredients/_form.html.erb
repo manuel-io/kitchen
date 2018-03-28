@@ -23,9 +23,11 @@
 <fieldset>
 
   <div class="field">
-    <%= f.select(:adding_id) do %>
-    <% products = Product.order(title: :asc).map { |value| [value.title, value.id] } %>
-    <%= options_for_select(products, selected: ingredient.adding_id) %>
+    <%= f.select(:uid) do %>
+    <% veggis = Vegetable.order(title: :asc).map { |value| [value.title, "Vegetable#{value.id}"] } %>
+    <% products = Product.order(title: :asc).map { |value| [value.title, "Product#{value.id}"] } %>
+    <% types = grouped_options = [[t(:vegetables), veggis], [t(:products), products]] %>
+    <%= grouped_options_for_select(types, selected: "#{ingredient.adding_type}#{ingredient.adding_id}") %>
     <% end %>
   </div>
 

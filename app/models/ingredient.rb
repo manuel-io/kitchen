@@ -1,4 +1,5 @@
 class Ingredient < ApplicationRecord
+  attr_accessor :uid
 
   belongs_to :component
   belongs_to :adding, polymorphic: true
