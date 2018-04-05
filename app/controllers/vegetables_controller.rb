@@ -1,4 +1,5 @@
 class VegetablesController < ApplicationController
+  before_action :require_login
   before_action :set_vegetable, only: [:show, :edit, :update, :destroy]
 
   # GET /vegetables

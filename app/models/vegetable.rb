@@ -9,6 +9,14 @@ class Vegetable < ApplicationRecord
     1000
   end
 
+  def manufacturer
+   "Ø"
+  end
+
+  def shop
+    "Ø"
+  end
+
   def unit
     :g
   end

@@ -28,7 +28,7 @@
       <h3><%= value.title %></h3>
       <table>
         <tr>
-          <th><% if product = value.adding %><%= link_to product.title, product_path(product.id), class: 'shop' %><% end %></th>
+          <th><% if product = value.adding %><%= link_to product.title, product_path(product.id), class: 'shop', title: "#{product.shop}, #{product.manufacturer}" %><% end %></th>
           <td><%= value.amount %></td>
           <td><%= value.unit %></td>
           <td><%= link_to 'Edit', edit_component_ingredient_path(@component, value) %></td>

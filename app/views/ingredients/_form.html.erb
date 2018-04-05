@@ -24,8 +24,8 @@
 
   <div class="field">
     <%= f.select(:uid) do %>
-    <% veggis = Vegetable.order(title: :asc).map { |value| [value.title, "Vegetable#{value.id}"] } %>
-    <% products = Product.order(title: :asc).map { |value| [value.title, "Product#{value.id}"] } %>
+    <% veggis = Vegetable.order(title: :asc).map { |value| [value.title, "Vegetable#{value.id}", { title: "Ø" } ]} %>
+    <% products = Product.order(title: :asc).map { |value| [value.title, "Product#{value.id}", { title: "#{value.shop}, #{value.manufacturer}" } ]} %>
     <% types = grouped_options = [[t(:vegetables), veggis], [t(:products), products]] %>
     <%= grouped_options_for_select(types, selected: "#{ingredient.adding_type}#{ingredient.adding_id}") %>
     <% end %>
