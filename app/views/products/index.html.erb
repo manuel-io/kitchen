@@ -16,7 +16,7 @@
       <tbody>
       <% @products.order(title: :asc).each do |product| %>
         <tr id='<%= product.id %>' class='change'>
-          <th><%= product.title %></th>
+          <th title='<%= product.shop.to_s + ', ' + product.amount.to_s %> <%= product.liquid ? 'ml' : 'g'  %>'><%= product.title %></th>
           <td><%= link_to 'Show', product %></td>
           <td><%= link_to 'Edit', edit_product_path(product) %></td>
           <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>

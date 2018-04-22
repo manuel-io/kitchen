@@ -1,26 +1,23 @@
 <nav>
-<%= link_to 'New Vegetable', new_vegetable_path %>
+  <%= link_to 'New Vegetable', new_vegetable_path %>
 </nav>
 
 <aside>
-<p id="notice"><%= notice %></p>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
 </aside>
 
 <article>
   <h2><%= t :vegetables %></h2>
   <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th><%= t(:price) %>/kg</th>
-        <th colspan='2'></th>
-       </tr>
-    </thead>
     <tbody>
     <% @vegetables.each do |vegetable| %>
       <tr id='<%= vegetable.id %>' class='change'>
-        <td><%= vegetable.title %></td>
-        <td><%= vegetable.price %></td>
+        <th><%= vegetable.title %></th>
+        <th class='right'><%= number_to_currency vegetable.price %>/kg</th>
         <td><%= link_to 'Edit', edit_vegetable_path(vegetable) %></td>
         <td><%= link_to 'Destroy', vegetable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

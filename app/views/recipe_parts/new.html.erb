@@ -46,6 +46,13 @@
     </div>
   </fieldset>
 
+  <fieldset id='amount'>
+    <legend>Menge</legend>
+    <div class="field">
+      <%= f.number_field :scale, require: true, step: 0.01 %>
+    </div>
+  </fieldset>
+
   <fieldset id='connection'>
     <legend>Connection</legend>
     <div class="field">
@@ -60,8 +67,8 @@
     <legend><%= t(:recipe) %></legend>
     <div class="field">
     <%= f.select(:recipe_id) do %>
-      <% recipes = Recipe.order(created_at: :desc).map { |value| [value.title, value.id] } %>
-      <%= options_for_select(recipes, selected: @recipe_part.recipe_id) %>
+      <% recipes = Recipe.order(title: :asc).map { |value| [value.title, value.id] } %>
+      <%= options_for_select(recipes, selected: Recipe.last.id) %>
     <% end %>
     </div>
   </fieldset>

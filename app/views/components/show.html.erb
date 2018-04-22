@@ -29,7 +29,7 @@
       <table>
         <tr>
           <th><% if product = value.adding %><%= link_to product.title, product_path(product.id), class: 'shop', title: "#{product.shop}, #{product.manufacturer}" %><% end %></th>
-          <td><%= value.amount %></td>
+          <td><%= amount value.amount, value.unit %></td>
           <td><%= value.unit %></td>
           <td><%= link_to 'Edit', edit_component_ingredient_path(@component, value) %></td>
           <td><%= link_to 'Destroy', component_ingredient_path(@component, value), method: :delete, data: { confirm: 'Are you sure?' } %></td>

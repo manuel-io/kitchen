@@ -3,14 +3,8 @@ class VegetablesController < ApplicationController
   before_action :set_vegetable, only: [:show, :edit, :update, :destroy]
 
   # GET /vegetables
-  # GET /vegetables.json
   def index
     @vegetables = Vegetable.order(title: :asc)
-  end
-
-  # GET /vegetables/1
-  # GET /vegetables/1.json
-  def show
   end
 
   # GET /vegetables/new
@@ -23,43 +17,29 @@ class VegetablesController < ApplicationController
   end
 
   # POST /vegetables
-  # POST /vegetables.json
   def create
     @vegetable = Vegetable.new(vegetable_params)
 
-    respond_to do |format|
-      if @vegetable.save
-        format.html { redirect_to @vegetable, notice: 'Vegetable was successfully created.' }
-        format.json { render :show, status: :created, location: @vegetable }
-      else
-        format.html { render :new }
-        format.json { render json: @vegetable.errors, status: :unprocessable_entity }
-      end
+    if @vegetable.save
+      redirect_to vegetables_path(anchor: @vegetable.id), notice: 'Vegetable was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /vegetables/1
-  # PATCH/PUT /vegetables/1.json
   def update
-    respond_to do |format|
-      if @vegetable.update(vegetable_params)
-        format.html { redirect_to @vegetable, notice: 'Vegetable was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vegetable }
-      else
-        format.html { render :edit }
-        format.json { render json: @vegetable.errors, status: :unprocessable_entity }
-      end
+    if @vegetable.update(vegetable_params)
+      redirect_to vegetables_path(anchor: @vegetable.id), notice: 'Vegetable was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /vegetables/1
-  # DELETE /vegetables/1.json
   def destroy
     @vegetable.destroy
-    respond_to do |format|
-      format.html { redirect_to vegetables_url, notice: 'Vegetable was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to vegetables_url, notice: 'Vegetable was successfully destroyed.'
   end
 
   private

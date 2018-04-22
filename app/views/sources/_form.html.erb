@@ -18,8 +18,8 @@
 
   <div class="field">
     <%= f.select(:recipe_id) do %>
-      <% recipes = Recipe.order(created_at: :desc).map { |value| [value.title, value.id] } %>
-      <%= options_for_select(recipes, selected: source.recipe_id) %>
+      <% recipes = Recipe.order(title: :asc).map { |value| [value.title, value.id] } %>
+      <%= options_for_select(recipes, selected: source.recipe_id || Recipe.last.id) %>
     <% end %>
   </div>
 

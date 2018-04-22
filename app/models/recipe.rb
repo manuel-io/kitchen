@@ -15,11 +15,11 @@ class Recipe < ApplicationRecord
   end
 
   def price_in_total
-    ('%.2f' % total).sub('.', ',')
+    total
   end
 
   def price_per_serving
-    ('%.2f' % (total / self.serves)).sub('.', ',')
+    total / self.serves
   end
 
   def tags_by_name(names)

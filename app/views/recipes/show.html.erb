@@ -23,7 +23,7 @@
     <table>
     <% component.part.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
       <tr>
-        <td><%= ingredient.amount %> <%= ingredient.unit %></td>
+        <td><%= amount ingredient.amount, ingredient.unit %> <%= ingredient.unit %></td>
         <td><%= ingredient.title %></td>
       </tr>
     <% end %>
@@ -40,15 +40,15 @@
     <h2><%= @recipe.title %></h2>
     <p><strong><%= t(:made) %>:</strong> <%= @recipe.last %></p>
     <p><strong><%= t(:serves) %>:</strong> <%= @recipe.serves %></p>
-    <p><strong><%= t(:price) + ' ' + t(:per_serving) %>:</strong> <%= @recipe.price_per_serving %> €</p>
-    <p><strong><%= t(:price) + ' ' + t(:in_total) %>:</strong> <%= @recipe.price_in_total %> €</p>
+    <p><strong><%= t(:price) + ' ' + t(:per_serving) %>:</strong> <%= number_to_currency @recipe.price_per_serving %></p>
+    <p><strong><%= t(:price) + ' ' + t(:in_total) %>:</strong> <%= number_to_currency @recipe.total %></p>
     <p id='description'><%= @recipe.description %></p>
   </header>
 
   <section class='body'>
     <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
       <% if component.part_type == 'Connection' %>
-        <h3><%= component.title  %></h3>
+        <h3><%= component.title %> x <%= amount component.part.scale, 'TL' %></h3>
         <p><%= markdown(component.description.to_s) + ' ' + link_to('Hier geht es zum Rezept', recipe_path(component.part.child.id)) %></p>
       <% else %>
 

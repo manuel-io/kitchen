@@ -31,43 +31,37 @@ class RecipePartsController < ApplicationController
 
     type = case reflection.class_name
       when 'connection'
-        Connection.new(child_id: params[:recipe_part][:child_id])
+        Connection.new(child_id: params[:recipe_part][:child_id], scale: params[:recipe_part][:scale])
       when 'component'
         Component.new
     end
 
-    @recipe = Recipe.find(params[:recipe_part][:recipe_id])
-
     if type.save
-      @recipe_part = @recipe.recipe_parts.new(title: params[:recipe_part][:title], part: type)
+      @recipe = Recipe.find(params[:recipe_part][:recipe_id])
+      @recipe_part = @recipe.recipe_parts.build(recipe_part_params.merge(part: type))
+
       if @recipe_part.save
         redirect_to recipe_parts_path(anchor: @recipe_part.recipe.id), notice: 'Recipe part was successfully created.'
       else
         render :new
       end
     else
-      @recipe_part = RecipePart.new
-      flash[:alert] = v.errors.full_messages
+      # @recipe_part = RecipePart.new
+      flash[:alert] = type.errors.full_messages
       render :new
     end
   end
 
   # PATCH/PUT /recipe_parts/1
-  # PATCH/PUT /recipe_parts/1.json
   def update
-    respond_to do |format|
-      if @recipe_part.update(recipe_part_edit_params)
-        format.html { redirect_to recipe_parts_path(anchor: @recipe_part.recipe.id), notice: 'Recipe part was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipe_part }
-      else
-        format.html { render :edit }
-        format.json { render json: @recipe_part.errors, status: :unprocessable_entity }
-      end
+    if @recipe_part.update(recipe_part_params)
+      redirect_to recipe_parts_path(anchor: @recipe_part.recipe.id), notice: 'Recipe part was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /recipe_parts/1
-  # DELETE /recipe_parts/1.json
   def destroy
     @recipe_part.destroy
     redirect_to recipe_parts_path(anchor: @recipe_part.recipe.id), notice: 'Recipe part was successfully destroyed.'
@@ -79,12 +73,7 @@ class RecipePartsController < ApplicationController
       @recipe_part = RecipePart.find(params[:id])
     end
 
-    def recipe_part_edit_params
+    def recipe_part_params
       params.require(:recipe_part).permit(:title, :description)
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recipe_part_new_params
-      params.require(:recipe_part).permit(:title, :description, :recipe_id, :part_id)
     end
 end

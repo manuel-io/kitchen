@@ -28,8 +28,8 @@
       </tr>
       <tr>
         <th>Preis:</th>
-        <td><%= @product.price_s %></td>
-        <td>EUR</td>
+        <td><%= number_to_human @product.price %></td>
+        <td><%= t :currency_text %></td>
       </tr>
     </table>
   </section>
@@ -38,37 +38,37 @@
     <table>
       <tr class='change nutritional'>
         <th>Brennwert:</th>
-        <td><%= @product.energy %></td>
+        <td><%= number @product.energy %></td>
         <td>J</td>
       </tr>
       <tr class='change nutritional'>
         <th>Fett:</th>
-        <td><%= @product.fat_total %></td>
+        <td><%= number @product.fat_total %></td>
         <td>g</td>
       </tr>
       <tr class='change nutritional'>
         <th>- davon gesättigte Fettsäuren:</th>
-        <td><%= @product.fat_saturated %></td>
+        <td><%= number @product.fat_saturated %></td>
         <td>g</td>
       </tr>
       <tr class='change nutritional'>
         <th>Kohlenhydrate:</th>
-        <td><%= @product.carbohydrate%></td>
+        <td><%= number @product.carbohydrate%></td>
         <td>g</td>
       </tr>
       <tr class='change nutritional'>
         <th>- davon Zucker:</th>
-        <td><%= @product.sugar %></td>
+        <td><%= number @product.sugar %></td>
         <td>g</td>
       </tr>
       <tr class='change nutritional'>
         <th>Ballaststoffe:</th>
-        <td><%= @product.fiber %></td>
+        <td><%= number @product.fiber %></td>
         <td>g</td>
       </tr>
       <tr class='change nutritional'>
         <th>Eiweiß:</th>
-        <td><%= @product.protein %></td>
+        <td><%= number @product.protein %></td>
         <td>g</td>
       </tr>
     </table>
@@ -161,22 +161,22 @@
     <table>
       <tr class='change mineral'>
         <th>Natrium:</th>
-        <td><%= @product.natrium %></td>
+        <td><%= number @product.natrium %></td>
         <td>mg</td>
       </tr>
       <tr class='change mineral'>
         <th>Kalium:</th>
-        <td><%= @product.potassium %></td>
+        <td><%= number @product.potassium %></td>
         <td>mg</td>
       </tr>
       <tr class='change mineral'>
         <th>Magnesium:</th>
-        <td><%= @product.magnesium %></td>
+        <td><%= number @product.magnesium %></td>
         <td>mg</td>
       </tr>
       <tr class='change mineral'>
         <th>Calcium:</th>
-        <td><%= @product.calcium %></td>
+        <td><%= number @product.calcium %></td>
         <td>mg</td>
       </tr>
     </table>

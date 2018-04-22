@@ -1,19 +1,36 @@
 <nav>
-  <%= link_to t(:index), recipe_parts_path(anchor: @connection.recipe.id) %> |
-  <%= link_to t(:details), @connection %>
+  <h4><%= @connection.title %></h4>
+  <%= link_to t(:index), recipe_parts_path(anchor:  @connection.recipe.id) %> |
+  <%= link_to t(:details),  @connection %>
 </nav>
 
-<aside>
-  <% if @connection.errors.any? %>
-  <section class='error'>
-    <% @connection.errors.full_messages.each do |message| %>
-      <p><%= message %><p>
-    <% end %>
-  </section>
-  <% end %>
-</aside>
-
 <article>
-  <h2>Editing Recipe</h2>
-  <%= render 'form', connection: @connection %>
+
+<%= form_with(model: @connection, local: true) do |form| %>
+<fieldset>
+  <legend><%= t(:connection) %></legend>
+  
+  <div class="field">
+    <%= form.select(:child_id) do %>
+      <% recipes = Recipe.order(title: :asc).map { |value| [value.title, value.id] } %>
+      <%= options_for_select(recipes, selected: @connection.child_id) %>
+    <% end %>
+  </div>
+</fieldset>
+
+<fieldset id='amount'>
+  <legend>Menge</legend>
+  
+  <div class="field">
+    <%= form.number_field :scale, require: true, step: 0.01 %>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="actions">
+    <%= form.submit t(:connection_save) %>
+  </div>
+</fieldset>
+<% end %>
+
 </article>

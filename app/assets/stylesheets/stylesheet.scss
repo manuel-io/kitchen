@@ -147,6 +147,8 @@ article {
   background-repeat: no-repeat;
 }
 
+span.source+span.source:before { content: ", "}
+
 @media screen and (min-width: 0px) {
   body > header {
     width: 360px - 2px;
@@ -336,11 +338,15 @@ th, td {
 th {
   text-align: left;
   width: 300px;
+
+  &.right { text-align: right; }
 }
 
 td {
   text-align: center;
-  width: 60px;
+
+  .left { text-align: left; }
+  .right { text-align: right; }
 }
 
 td:first-child, td:last-child {

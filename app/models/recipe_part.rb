@@ -1,5 +1,5 @@
 class RecipePart < ApplicationRecord
-  attr_accessor :child_id
+  attr_accessor :child_id, :scale
 
   belongs_to :recipe
   belongs_to :part, polymorphic: true, dependent: :destroy

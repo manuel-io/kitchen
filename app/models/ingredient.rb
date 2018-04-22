@@ -18,8 +18,4 @@ class Ingredient < ApplicationRecord
     end
     amount * (self.adding.price.to_f / self.adding.amount.to_f)
   end
-
-  def amount
-    super.to_s.sub(/\.0+/, '')
-  end
 end

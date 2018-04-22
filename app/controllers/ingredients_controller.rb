@@ -4,7 +4,6 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/new
   def new
-    #render plain: Component.methods
     @component = Component.find(params[:component_id])
     @ingredient = @component.ingredients.build
   end
@@ -14,7 +13,6 @@ class IngredientsController < ApplicationController
   end
 
   # POST /ingredients
-  # POST /ingredients.json
   def create
     adding = case params[:ingredient][:uid]
       when /Vegetable(\d+)/ then Vegetable.find($1)
@@ -22,47 +20,33 @@ class IngredientsController < ApplicationController
     end
 
     @component = Component.find(params[:component_id])
-
     @ingredient = @component.ingredients.build(ingredient_params.merge(adding: adding))
     
-    unless @ingredient.valid?
-      p @ingredient
-    end
-
-    respond_to do |format|
-      if @ingredient.save
-        format.html { redirect_to component_path(@component), notice: 'Ingredient was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @ingredient.save
+      redirect_to component_path(@component), notice: 'Ingredient was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /ingredients/1
-  # PATCH/PUT /ingredients/1.json
   def update
     adding = case params[:ingredient][:uid]
       when /Vegetable(\d+)/ then Vegetable.find($1)
       when /Product(\d+)/ then Product.find($1)
     end
-
-    respond_to do |format|
-      if @ingredient.update(ingredient_params.merge(adding: adding))
-        format.html { redirect_to component_path(@component), notice: 'Ingredient was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    
+    if @ingredient.update(ingredient_params.merge(adding: adding))
+      redirect_to component_path(@component), notice: 'Ingredient was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /ingredients/1
-  # DELETE /ingredients/1.json
   def destroy
-#    render plain: params.inspect
     @ingredient.destroy
-    respond_to do |format|
-      format.html { redirect_to component_path(params[:component_id]), notice: 'Ingredient was successfully destroyed.' }
-    end
+    redirect_to component_path(params[:component_id]), notice: 'Ingredient was successfully destroyed.'
   end
 
   private

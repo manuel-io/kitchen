@@ -1,6 +1,18 @@
-<h1>Editing Vegetable</h1>
+<nav>
+  <%= link_to t(:index), vegetables_path(anchor: @vegetable.id) %>
+</nav>
 
-<%= render 'form', vegetable: @vegetable %>
+<aside>
+  <% if @vegetable.errors.any? %>
+  <section class='error'>
+    <% @vegetable.errors.full_messages.each do |message| %>
+      <p><%= message %><p>
+    <% end %>
+  </section>
+  <% end %>
+</aside>
 
-<%= link_to 'Show', @vegetable %> |
-<%= link_to 'Back', vegetables_path %>
+<article>
+  <h2>Editing Vegetable</h2>
+  <%= render 'form', vegetable: @vegetable %>
+</article>

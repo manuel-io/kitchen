@@ -3,13 +3,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
-  # GET /products.json
   def index
     @products = Product.all
   end
 
   # GET /products/1
-  # GET /products/1.json
   def show
   end
 
@@ -23,38 +21,29 @@ class ProductsController < ApplicationController
   end
 
   # POST /products
-  # POST /products.json
   def create
     @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    
+    if @product.save
+      redirect_to @product, notice: 'Product was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @product.update(product_params)
+      redirect_to @product, notice: 'Product was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /products/1
-  # DELETE /products/1.json
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-    end
+    redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
   private
