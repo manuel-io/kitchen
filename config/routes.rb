@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :products
 
   resources :recipes do
-    get 'show_picture', on: :collection
+    get 'picture', on: :member
+    get 'embedded', on: :member
   end
 
   resources :recipe_parts, except: [:show]

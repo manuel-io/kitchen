@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+  <head>
+    <title><%= @recipe.title %></title>
+    <style>
+      * { font-family: verdana; font-size: 12px; margin: 0px; padding: 0px; }
+      fieldset legend { font-weight: bold; padding-left: 5px; padding-right: 5px; }
+      #description { border-bottom: 1px solid #000; padding: 5px; }
+      #image { vertical-align: top; }
+      #amount { text-align: right; padding-right: 2px; }
+      img.image { width: 150px; padding-right: 10px; }
+      table { padding-top: 5px; padding-bottom: 5px;}
+      p { padding: 5px; }
+    </style>
+  </head>
+  <body>
+    <fieldset>
+      <legend><%= @recipe.title %></legend>
+      <p id='description'><%= @recipe.description %></p>
+
+      <table>
+        <tr>
+          <td id='image'><%= image_tag picture_recipe_path(@recipe.id), class: 'image' %></td>
+          <td>
+            <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
+              <% if component.part_type == 'Connection' %>
+                <h3><%= component.title %></h3>
+                <table>
+                </table>
+                <p>Selber machen oder kaufen.</p>
+              <% else %>
+                <h3><%= component.title %></h3>
+                <table>
+                  <% component.part.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
+                  <tr>
+                    <td id='amount'><%= amount ingredient.amount, ingredient.unit %> <%= ingredient.unit %></td>
+                    <td><%= ingredient.title %></td>
+                  </tr>
+                  <% end %>
+                </table>
+                <%= markdown(component.description.to_s) %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+  </body>

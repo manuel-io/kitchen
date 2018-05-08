@@ -1,8 +1,8 @@
 require 'mini_magick'
 
 class RecipesController < ApplicationController
-  before_action :require_login
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: [:embedded, :picture]
+  before_action :set_recipe, only: [:show, :embedded, :picture, :edit, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json
@@ -15,6 +15,15 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
+  end
+
+  def embedded
+    if signed_in? or @recipe.public?
+      response.headers.delete 'X-Frame-Options'
+      render layout: false
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /recipes/new
@@ -67,9 +76,12 @@ class RecipesController < ApplicationController
     end
   end
 
-  def show_picture
-    @recipe = Recipe.find(params[:id])
-    send_data @recipe.picture, :type => 'image/jpeg', :disposition => 'inline'
+  def picture
+    if signed_in? or @recipe.public?
+      send_data @recipe.picture, :type => 'image/jpeg', :disposition => 'inline'
+    else
+      send_data 0, :type => 'image/jpeg', :disposition => 'inline'
+    end
   end
 
   private

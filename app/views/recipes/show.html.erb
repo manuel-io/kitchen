@@ -11,7 +11,7 @@
   <% end %>
 
   <section>
-    <%= image_tag url_for(controller: "recipes", action: "show_picture", id: @recipe.id) %>
+    <%= image_tag picture_recipe_path(@recipe.id) %>
   </section>
   
   <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
