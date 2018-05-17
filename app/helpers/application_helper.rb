@@ -12,9 +12,10 @@ module ApplicationHelper
           when 0.6 then '⅗'
           when 0.75 then '¾'
           when 0.8 then '⅘'
-          else number_to_human val
+          when 1..9 then number_with_precision(val, precision: 0)
+          else number_with_precision(val, precision: 2)
         end
-      else number_to_human val
+      else number_with_precision(val, precision: 0)
     end
   end
 

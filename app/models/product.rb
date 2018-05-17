@@ -8,9 +8,13 @@ class Product < ApplicationRecord
   validates :price, presence: true,  numericality: { greater_than: 0 }
   validates :liquid, inclusion: { in: [ true, false ] }
 
-#  def price_s
-#    "%.2f" % self.price
-#  end
+  validate :check_code_length
+  
+  def check_code_length
+    unless  [8, 12, 13].include? code.length
+      errors.add :code, 'EAN-8, EAN-13, UPC-A'
+    end
+  end
 
    %w[energy fat_total fat_saturated carbohydrate sugar fiber protein].each do |name|
      define_method name.to_sym do
