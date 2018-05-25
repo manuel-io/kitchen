@@ -31,6 +31,12 @@
   <% end %>
   </section>
   <% end %>
+
+  <% if @recipe.public? %>
+  <section>
+    <textarea><iframe style='width:100%;height:500px;' src='<%= url_for(action: 'embedded', controller: 'recipes', only_path: false) %>' frameborder='0'> </iframe></textarea>
+  <% end %>
+  </section>
 </aside>
 
 <article>
