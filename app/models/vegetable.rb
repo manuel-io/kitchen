@@ -1,6 +1,5 @@
 class Vegetable < ApplicationRecord
-  has_one :component, as: :adding
-  has_one :recipe_part, through: :component
+   has_many :ingredients, as: :adding
 
   validates :title, presence: true, uniqueness: true
   validates :price, presence: true,  numericality: { greater_than: 0 }

@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  has_many :ingredients, dependent: :destroy
+  has_many :ingredients, as: :adding
 
   validates :title, presence: true, uniqueness: { scope: [ :manufacturer, :shop, :amount, :liquid ] }
   validates :manufacturer, presence: true
