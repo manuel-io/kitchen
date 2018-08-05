@@ -1,0 +1,29 @@
+<div class='level'>
+    <table>
+      <tr>
+        <td>
+          <% recipe.recipe_parts.order(title: :asc).each do |component| %>
+            <% if component.part_type == 'Connection' %>
+              <h3><%= component.title %></h3>
+              <%if signed_in? or component.part.child.public? %>
+                <p><%= link_to(t(:click), { action: 'embedded', controller: 'recipes', id: component.part.child.id, only_path: false }, { target: '_blank' }) %></p>
+              <% else %>
+                <p>Selber machen oder kaufen.</p>
+              <% end %>
+            <% else %>
+              <h3><%= component.title %></h3>
+              <table>
+                <% component.part.ingredients.order(unit: :desc, amount: :asc).each do |ingredient| %>
+                <tr>
+                  <td id='amount'><%= amount ingredient.amount, ingredient.unit %> <%= ingredient.unit %></td>
+                  <td><%= ingredient.title %></td>
+                </tr>
+                <% end %>
+              </table>
+              <%= markdown(component.description.to_s) %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+</div>

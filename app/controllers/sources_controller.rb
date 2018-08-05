@@ -56,14 +56,18 @@ class SourcesController < ApplicationController
   end
 
   def list
+    @recipes = if @published then Recipe.where(public: true).order(title: :asc)
+    else Recipe.order(title: :asc)
+    end
+
     @recipes = if params.has_key?(:tags) and !params[:tags].empty?
-      Recipe.order(title: :asc).reject do |recipe|
+      @recipes.order(title: :asc).reject do |recipe|
         not recipe.all_tags.split(',').any? { |v|
           params[:tags].split(',').include? v.strip
         }
       end
-    else
-      Recipe.order(title: :asc)
+      else
+      @recipes
     end
 
     respond_to do |format|

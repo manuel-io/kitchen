@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508093149) do
+ActiveRecord::Schema.define(version: 20180805014646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 20180508093149) do
     t.index ["adding_type", "adding_id"], name: "index_ingredients_on_adding_type_and_adding_id"
     t.index ["component_id"], name: "index_ingredients_on_component_id"
     t.index ["product_id"], name: "index_ingredients_on_product_id"
+  end
+
+  create_table "parameters", id: :serial, force: :cascade do |t|
+    t.json "data"
+    t.boolean "flag"
   end
 
   create_table "products", id: :serial, force: :cascade do |t|
@@ -111,6 +116,7 @@ ActiveRecord::Schema.define(version: 20180508093149) do
     t.binary "picture"
     t.integer "serves"
     t.boolean "public"
+    t.boolean "embedded"
   end
 
   create_table "seasonnings", force: :cascade do |t|

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_locale
+  before_action :set_locale, :set_published
 
   include Oath::ControllerHelpers
   protect_from_forgery with: :exception
@@ -20,7 +20,13 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
+  def set_published
+    pub = params[:published] || false
+    pub = signed_in? ? false : pub
+    @published = ActiveModel::Type::Boolean.new.cast(pub)
+  end
+
   def default_url_options
-    { locale: I18n.locale }
+    { locale: I18n.locale, published: @published }
   end
 end

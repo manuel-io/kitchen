@@ -1,7 +1,7 @@
 <nav>
 </nav>
 
-<aside>
+<aside id='sources_list'>
   <% if notice %>
   <section class='notice'>
     <p id="notice"><%= notice %></p>
@@ -15,6 +15,17 @@
       Dies muss aber nicht unbedingt auch auf die Rezepte in den Quellen
       zutreffen.
     </p>
+  </section>
+
+  <section>
+    <%= form_tag({controller: 'sources', action: 'list'}, method: 'get') do %>
+      <table>
+        <tr>
+          <td><%= check_box_tag(:published, 'true', @published) %></td>
+          <td><%= submit_tag('Nur öffentliche Rezepte') %></td>
+        </tr>
+      </table>
+    <% end %>
   </section>
 
   <section>
@@ -79,7 +90,11 @@
       <h3 class='recipe'><%= value.title %></h3>
       <p><%= value.description %></p>
       <p><%= t :serves_in_word, price: number_to_currency(value.price_per_serving), servings: value.serves %></p>
-      <p><%= t :sources %>: <%= value.sources.map { |v| "<span class='source'>" + link_to(v.title, v.url) + "</span>" }.join.html_safe %></p>
+      <% if value.public? %>
+        <p><%= t :published %>: <%= link_to(t(:click), { action: 'embedded', controller: 'recipes', id: value.id }, { target: '_blank' }) %></p>
+      <% else %>
+        <p><%= t :sources %>: <%= value.sources.map { |v| "<span class='source'>" + link_to(v.title, v.url) + "</span>" }.join.html_safe %></p>
+      <% end %>
     <% end %>
     </section>
   <% end %>

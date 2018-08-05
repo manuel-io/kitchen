@@ -11,25 +11,33 @@
       @media (max-width: 500px) {
         img.image { width: 120px; }
       }
-      table { padding-top: 5px; padding-bottom: 5px;}
+      table { padding: 5px; }
       p { padding: 5px; }
+      .level {
+        border: 1px solid #f0f0f0;
+        background-color: #fbfbfb;
+        margin: 10px;
+      }
     </style>
   </head>
   <body>
     <fieldset>
       <legend><%= @recipe.title %></legend>
       <p id='description'><%= @recipe.description %></p>
-
       <table>
         <tr>
           <td id='image'><%= image_tag picture_recipe_path(@recipe.id), class: 'image' %></td>
           <td>
             <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
               <% if component.part_type == 'Connection' %>
-                <h3><%= component.title %></h3>
-                <table>
-                </table>
-                <p>Selber machen oder kaufen.</p>
+                <h3><%= component.title %> x <%= amount component.part.scale, 'TL' %></h3>
+                <% if @recipe.embedded? %>
+                  <%= render 'level', recipe: component.part.child %>
+                <% elsif signed_in? or component.part.child.public? %>
+                  <p><%= link_to(t(:click), { action: 'embedded', controller: 'recipes', id: component.part.child.id, only_path: false }, { target: '_blank' }) %></p>
+                <% else %>
+                  <p>Selber machen oder kaufen.</p>
+                <% end %>
               <% else %>
                 <h3><%= component.title %></h3>
                 <table>
