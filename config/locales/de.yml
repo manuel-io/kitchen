@@ -3,7 +3,7 @@ de:
   amount:          "Menge"
   change:          "Verändern"
   child:           "Verbindung"
-  click:           "Hier geht es um Rezept"
+  click:           "Hier geht es zum Rezept"
   code:            "Barcode"
   component_new:   "Neue Komponente"
   component_save:  "Speichern"
