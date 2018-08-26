@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class SourcesController < ApplicationController
   before_action :require_login, except: [ :list ]
   rescue_from ActionController::UnknownFormat, with: :raise_not_found
@@ -6,7 +8,7 @@ class SourcesController < ApplicationController
   # GET /sources
   # GET /sources.json
   def index
-    @recipes = Recipe.order(title: :asc)
+    @recipes = Recipe.paginate(page: params[:page], per_page: 12).order(title: :asc)
     @sources = Source.all
   end
 
@@ -56,19 +58,27 @@ class SourcesController < ApplicationController
   end
 
   def list
-    @recipes = if @published then Recipe.where(public: true).order(title: :asc)
-    else Recipe.order(title: :asc)
-    end
 
-    @recipes = if params.has_key?(:tags) and !params[:tags].empty?
-      @recipes.order(title: :asc).reject do |recipe|
-        not recipe.all_tags.split(',').any? { |v|
-          params[:tags].split(',').include? v.strip
-        }
-      end
-      else
-      @recipes
+#    @recipes = if @published then Recipe.where(public: true).order(title: :asc)
+#      else  Recipe.order(title: :asc)
+#    end
+
+    @recipes = if @published then Recipe.paginate(page: params[:page], per_page: 6).where(public: true).order(title: :asc)
+      else  Recipe.paginate(page: params[:page], per_page: 6).order(title: :asc)
     end
+    @last = Recipe.where(public: true).last
+
+#    @recipes = if params.has_key?(:tags) and !params[:tags].empty?
+#      @recipes.order(title: :asc).reject do |recipe|
+#        not recipe.all_tags.split(',').any? { |v|
+#          params[:tags].split(',').include? v.strip
+#        }
+#      end
+#    else
+#      @recipes
+#    end
+     
+#    @recipes = @recipes.paginate(page: params[:page], per_page: 3)
 
     respond_to do |format|
       format.html { render }

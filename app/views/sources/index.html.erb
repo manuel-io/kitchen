@@ -13,6 +13,7 @@
 
 <article>
   <h2><%= t(:sources) %></h2>
+  <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
     <section id='<%= value.id %>'>
@@ -32,4 +33,5 @@
     </section>
     <% end %>
   <% end %>
+  <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
 </article>

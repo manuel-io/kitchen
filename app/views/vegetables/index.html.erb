@@ -12,6 +12,7 @@
 
 <article>
   <h2><%= t :vegetables %></h2>
+  <%= will_paginate @vegetables, inner_window: 2, outer_window: 0 %>
   <table>
     <tbody>
     <% @vegetables.each do |vegetable| %>
@@ -24,4 +25,5 @@
     <% end %>
     </tbody>
   </table>
+  <%= will_paginate @vegetables, inner_window: 2, outer_window: 0 %>
 </article>

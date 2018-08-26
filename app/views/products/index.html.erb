@@ -12,6 +12,7 @@
 
 <article>
   <h2><%= t :products %></h2>
+  <%= will_paginate @products, inner_window: 2, outer_window: 0 %>
     <table>
       <tbody>
       <% @products.order(title: :asc).each do |product| %>
@@ -24,4 +25,5 @@
       <% end %>
       </tbody>
     </table>
+  <%= will_paginate @products, inner_window: 2, outer_window: 0 %>
 </article>

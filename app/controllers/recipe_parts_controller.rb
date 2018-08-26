@@ -6,7 +6,8 @@ class RecipePartsController < ApplicationController
   # GET /recipe_parts.json
   def index
 #    @recipe_parts = RecipePart.all
-    @recipes = Recipe.all.order(title: :asc)
+    @recipes = Recipe.paginate(page: params[:page], per_page: 12).order(title: :asc)
+    @last = Recipe.order('created_at').last
   end
 
   # GET /recipe_parts/1

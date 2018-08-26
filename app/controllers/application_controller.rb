@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def set_published
     pub = params[:published] || false
-    pub = signed_in? ? false : pub
+#    pub = signed_in? ? false : pub
     @published = ActiveModel::Type::Boolean.new.cast(pub)
   end
 

@@ -4,7 +4,7 @@ class VegetablesController < ApplicationController
 
   # GET /vegetables
   def index
-    @vegetables = Vegetable.order(title: :asc)
+    @vegetables = Vegetable.paginate(page: params[:page], per_page: 48).order(title: :asc)
   end
 
   # GET /vegetables/new
