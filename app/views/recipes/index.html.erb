@@ -42,7 +42,21 @@
 
   <div style='clear:both'></div>
 
-  <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  <div class='search'>
+    <%= form_tag recipes_path, method: :get do %>
+      <p>
+        <!--
+          not appropriate
+          <%= text_field_tag :query, params[:query], placeholder: 'Suche nach Rezepten', autofocus: true, onchange: 'this.form.submit()' %>
+        -->
+        <%= text_field_tag :query, params[:query], placeholder: t(:search_term), autofocus: true %>
+        <%= submit_tag t(:search), name: nil %>
+      </p>
+    <% end %>
+
+    <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  </div>
+
   <% @recipes.each do |recipe| %>
     <section id='<%= recipe.id %>'>
       <h3 class='recipe'><%= recipe.title %></h3>

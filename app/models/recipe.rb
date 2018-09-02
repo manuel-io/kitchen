@@ -10,6 +10,14 @@ class Recipe < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :description, presence: true
 
+  def self.search(query)
+    if query.present?
+      where('title ILIKE :q', q: "%#{query}%")
+    else
+      where(nil)
+    end
+  end
+
   def total
     self.recipe_parts.inject(0) { |sum, poly| sum + poly.part.total }
   end

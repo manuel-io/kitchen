@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.paginate(page: params[:page], per_page: 12).order(title: :asc)
+    @recipes = Recipe.search(params['query']).paginate(page: params[:page], per_page: 12).order(title: :asc)
     @last = Recipe.last
     @ids = Recipe.ids.shuffle(random: Random.new(Time.now.to_i))[0...10]
   end

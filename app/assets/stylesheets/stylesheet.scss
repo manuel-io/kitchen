@@ -524,3 +524,33 @@ header.last {
   }
 }
 
+.search {
+  form {
+    padding-bottom: 1em;
+    text-align: center;
+
+    input {
+      width: 20%;
+      height: 34px;
+      border: 2px solid #888;
+      border-left: 1px solid #888;
+      background-color: #fff;
+      color: #000;
+      font-weight: bold;
+      border-radius: 3px;
+    }
+
+    input#query {
+      width: 70%;
+      height: 22px;
+      padding: 4px;
+      border: 2px solid #888;
+      border-right: 1px solid #888;
+      background-color: #fff;
+    }
+
+  }
+
+  .pagination {
+  }
+}

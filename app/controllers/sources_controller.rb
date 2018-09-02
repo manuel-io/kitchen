@@ -63,8 +63,8 @@ class SourcesController < ApplicationController
 #      else  Recipe.order(title: :asc)
 #    end
 
-    @recipes = if @published then Recipe.paginate(page: params[:page], per_page: 6).where(public: true).order(title: :asc)
-      else  Recipe.paginate(page: params[:page], per_page: 6).order(title: :asc)
+    @recipes = if @published then Recipe.search(params[:query]).paginate(page: params[:page], per_page: 6).where(public: true).order(title: :asc)
+      else  Recipe.search(params[:query]).paginate(page: params[:page], per_page: 6).order(title: :asc)
     end
     @last = Recipe.where(public: true).last
 

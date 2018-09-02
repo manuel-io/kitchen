@@ -56,6 +56,8 @@ de:
   recipe_save:     "Speichern"
   save:            "Speichern"
   scale:           "Menge"
+  search:          "Suche"
+  search_term:     "Suche nach Rezepten"
   shop:            "Geschäft"
   show:            "Anzeigen"
   sign_in:         "Login"

@@ -19,6 +19,7 @@
 
   <section>
     <%= form_tag({controller: 'sources', action: 'list'}, method: 'get') do %>
+      <%= hidden_field_tag 'query', params['query'] %>
       <table>
         <tr>
           <td><%= check_box_tag(:published, 'true', @published) %></td>
@@ -104,7 +105,22 @@
     </div>
   </header>
 
-  <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  <div class='search'>
+    <%= form_tag list_sources_path, method: :get do %>
+      <p>
+        <!--
+          not appropriate
+          <%= text_field_tag :query, params[:query], placeholder: 'Suche nach Rezepten', onchange: 'this.form.submit()' %>
+        -->
+        <%= text_field_tag :query, params[:query], placeholder: t(:search_term), autofocus: true %>
+        <%= hidden_field_tag 'published', @published %>
+        <%= submit_tag t(:search), name: nil %>
+      </p>
+    <% end %>
+
+    <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  </div>
+
   <% @recipes.each do |value| %>
     <% if value.sources.length > 0 %>
     <section id='<%= value.id %>'>

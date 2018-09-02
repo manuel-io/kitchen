@@ -26,5 +26,7 @@ en:
   number_format: "%{integer}.%{fractional}"
   published: "Published"
   tags_descc: "Tags separated with a comma"
+  search: "Search"
+  search_term: "Search for recipes"
   serves_in_word: "%{servings} Servings á %{price}"
   vegetable: "Vegetable"
