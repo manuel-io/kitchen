@@ -5,16 +5,17 @@
   <fieldset>
     <legend><%= t(:credentials) %></legend>
 
-    <div>
+    <div class='field'>
       <%= form.label :email %>
       <%= form.email_field :email, autofocus: true, require: true %>
     </div>
 
-    <div>
+    <div class='field'>
       <%= form.label t(:password) %>
       <%= form.password_field :password, require: true %>
     </div>
-
+  </fieldset>
+  <fieldset>
     <div class='actions'>
       <%= form.submit t(:sign_in) %>
     </div>

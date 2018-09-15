@@ -38,6 +38,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
+gem 'pg_search'
 
 
 # Use Capistrano for deployment

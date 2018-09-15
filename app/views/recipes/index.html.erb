@@ -10,11 +10,11 @@
   <% end %>
 
   <section>
-  <div id='kitcat'>
-  <% @ids.each do |id| %>
-    <%= image_tag picture_recipe_path(id) %>
-  <% end %>
-  </div>
+    <div id='cloud'>
+      <% @cloud.each do |value| %>
+        <%= image_tag picture_recipe_path(value.id), title: value.title %>
+      <% end %>
+    </div>
   </section>
 </aside>
 
@@ -26,7 +26,7 @@
       <%= image_tag picture_recipe_path(@last.id) %>
     </div>
     <div class='description'>
-      <h3 class='recipe'><%= @last.title %></h3></center>
+      <h3><%= @last.title %></h3>
       <table>
         <tr>
           <td><%= link_to t(:show), recipe_path(@last) %></td>

@@ -12,7 +12,22 @@
 
 <article>
   <h2><%= t :products %></h2>
-  <%= will_paginate @products, inner_window: 2, outer_window: 0 %>
+
+  <div class='search'>
+    <%= form_tag products_path, method: :get do %>
+      <p>
+        <!--
+          not appropriate
+          <%= text_field_tag :query, params[:query], placeholder: 'Suche nach Rezepten', autofocus: true, onchange: 'this.form.submit()' %>
+        -->
+        <%= text_field_tag :query, params[:query], placeholder: t(:search_term), autofocus: true %>
+        <%= submit_tag t(:search), name: nil %>
+      </p>
+    <% end %>
+
+    <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  </div>
+
     <table>
       <tbody>
       <% @products.order(title: :asc).each do |product| %>

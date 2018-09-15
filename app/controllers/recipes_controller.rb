@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.search(params['query']).paginate(page: params[:page], per_page: 12).order(title: :asc)
     @last = Recipe.last
-    @ids = Recipe.ids.shuffle(random: Random.new(Time.now.to_i))[0...10]
+    @cloud = Recipe.all.shuffle(random: Random.new(Time.now.to_i))[0...4]
   end
 
   # GET /recipes/1

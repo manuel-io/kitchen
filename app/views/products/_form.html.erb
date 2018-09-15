@@ -28,95 +28,92 @@
     <legend><%= t(:details) %></legend>
 
     <div class="field">
-      <%= f.label t(:liquid) %>
-      <%= f.radio_button :liquid, true %>
-      <%= f.label t(:solid) %>
-      <%= f.radio_button :liquid, false, checked: (!product.liquid) %>
+      <%= f.label t(:liquid) do %>
+        <%= f.radio_button :liquid, true %>
+        <%= t(:liquid) %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label t(:solid) do %>
+        <%= f.radio_button :liquid, false, checked: (!product.liquid) %>
+        <%= t(:solid) %>
+      <% end %>
     </div>
 
     <div class="field">
       <% unit = if product.liquid then 'ml' else 'g' end %>
-      <%= f.label t(:amount) %>
-      <%= f.number_field :amount, require: true %><span class='unit'><%= unit %></span>
+      <%= f.label t(:amount) do %>
+        <%= t(:amount) %> (<span class='unit'><%= unit %></span>)
+      <% end %>
+      <%= f.number_field :amount, require: true %>
     </div>
 
     <div class="field">
-      <%= f.label t(:price) %>
+      <%= f.label t(:price) do %>
+        <%= t(:price) %> (€)
+      <% end %>
       <%= f.number_field :price, require: true, step: 0.01 %>
     </div>
   </fieldset>
 
   <fieldset>
-    <legend><%=t(:nutritionals) %> / 100 <span class='unit'><%= unit %></span></legend>
+    <legend><%= t(:nutritionals) %> / 100 <span class='unit'><%= unit %></span></legend>
 
     <div class="field">
-      <%= f.label :energy %>
-      <%= f.number_field :energy %>J
+      <%= f.label :energy do %>
+        <%= t(:energy) %> (J)
+      <% end %>
+      <%= f.number_field :energy %>
     </div>
 
     <div class="field">
-      <%= f.label :fat_total %>
-      <%= f.number_field :fat_total, step: 0.1 %>g
+      <%= f.label :fat_total do %>
+        <%= t(:fat) %> (g)
+      <% end %>
+      <%= f.number_field :fat_total, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :fat_saturated %>
-      <%= f.number_field :fat_saturated, step: 0.1 %>g
+      <%= f.label :fat_saturated do %>
+        <%= t(:fat_saturated) %> (g)
+      <% end %>
+      <%= f.number_field :fat_saturated, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :carbohydrate %>
-      <%= f.number_field :carbohydrate, step: 0.1 %>g
+      <%= f.label :carbohydrate do %>
+        <%= t(:carbohydrates) %> (g)
+      <% end %>
+      <%= f.number_field :carbohydrate, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :sugar %>
-      <%= f.number_field :sugar, step: 0.1 %>g
+      <%= f.label :sugar do %>
+        <%= t(:sugar) %> (g)
+      <% end %>
+      <%= f.number_field :sugar, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :fiber %>
-      <%= f.number_field :fiber, step: 0.1 %>g
+      <%= f.label :fiber do %>
+        <%= t(:fibres) %> (g)
+      <% end %>
+      <%= f.number_field :fiber, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :protein %>
-      <%= f.number_field :protein, step: 0.1 %>g
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend><%= t(:vitamins) %> / 100 <%= unit %></legend>
-
-    <div class="field">
-      <%= f.label :a, 'Vitamin A' %>
-      <%= f.number_field :a, step: 0.1 %>ug
+      <%= f.label :protein do %>
+        <%= t(:protein) %> (g)
+      <% end %>
+      <%= f.number_field :protein, step: 0.1 %>
     </div>
 
     <div class="field">
-      <%= f.label :b9, 'Folsäure' %>
-      <%= f.number_field :b9, step: 0.1 %>ug
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend><%= t(:minerals) %> / 100 <span class='unit'><%= unit %></span></legend>
-
-    <div class="field">
-      <%= f.label :natrium %>
-      <%= f.number_field :natrium, step: 0.01 %>mg
-    </div>
-    <div class="field">
-      <%= f.label :potassium %>
-      <%= f.number_field :potassium, step: 0.01 %>mg
-    </div>
-    <div class="field">
-      <%= f.label :magnesium %>
-      <%= f.number_field :magnesium, step: 0.01 %>mg
-    </div>
-    <div class="field">
-      <%= f.label :calcium %>
-      <%= f.number_field :calcium, step: 0.01 %>mg
+      <%= f.label :natrium do %>
+        <%= t(:salt) %> (mg)
+      <% end %>
+      <%= f.number_field :natrium, step: 0.01 %>
     </div>
   </fieldset>
 

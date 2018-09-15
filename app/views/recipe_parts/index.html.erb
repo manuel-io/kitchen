@@ -18,7 +18,7 @@
       <%= image_tag picture_recipe_path(@last.id) %>
     </div>
     <div class='description'>
-      <h3 class='recipe'><%= @last.title %></h3></center>
+      <h3><%= @last.title %></h3></center>
       <table>
         <tr>
           <td><%= link_to t(:show), recipe_path(@last) %></td>
@@ -32,7 +32,21 @@
     </div>
   </header>
 
-  <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  <div class='search'>
+    <%= form_tag recipe_parts_path, method: :get do %>
+      <p>
+        <!--
+          not appropriate
+          <%= text_field_tag :query, params[:query], placeholder: 'Suche nach Rezepten', autofocus: true, onchange: 'this.form.submit()' %>
+        -->
+        <%= text_field_tag :query, params[:query], placeholder: t(:search_term), autofocus: true %>
+        <%= submit_tag t(:search), name: nil %>
+      </p>
+    <% end %>
+
+    <%= will_paginate @recipes, inner_window: 2, outer_window: 0 %>
+  </div>
+
   <% @recipes.each do |recipe| %>
   <section id='<%= recipe.id %>'>
     <h3 class='recipe'><%= recipe.title %></h3>

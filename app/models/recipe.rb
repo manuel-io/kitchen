@@ -10,9 +10,13 @@ class Recipe < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :description, presence: true
 
+  include PgSearch
+  pg_search_scope :pg_search, against: [:title, :description],
+    using: {tsearch: {prefix: true}}
+
   def self.search(query)
     if query.present?
-      where('title ILIKE :q', q: "%#{query}%")
+      pg_search(query)
     else
       where(nil)
     end

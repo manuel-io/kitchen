@@ -1,7 +1,7 @@
 <% unit = if @product.liquid then 'ml' else 'g' end %>
 
 <nav>
-  <%= link_to t(:index), products_path(anchor: @product.id) %> |
+  <%= link_to t(:index), products_path(query: @product.title[0], anchor: @product.id) %>
   <%= link_to t(:edit), edit_product_path(@product) %>
 </nav>
 

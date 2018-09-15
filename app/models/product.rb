@@ -10,6 +10,19 @@ class Product < ApplicationRecord
 
   validate :check_code_length
   
+  include PgSearch
+  pg_search_scope :pg_search, against: [:title],
+    using: {tsearch: {prefix: true}},
+    associated_against: {ingredients: :title}
+
+  def self.search(query)
+    if query.present?
+      pg_search(query)
+    else
+      where(nil)
+    end
+  end
+
   def check_code_length
     unless  [8, 12, 13].include? code.length
       errors.add :code, 'EAN-8, EAN-13, UPC-A'

@@ -1,5 +1,5 @@
 <nav>
-  <%= link_to t(:index), recipes_path(anchor: @recipe.id) %> |
+  <%= link_to t(:index), recipes_path(query: @recipe.title[0], anchor: @recipe.id) %>
   <%= link_to t(:edit), edit_recipe_path(@recipe) %>
 </nav>
 
@@ -51,18 +51,16 @@
     <p id='description'><%= @recipe.description %></p>
   </header>
 
-  <section class='body'>
+  <section class='markdown'>
     <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
       <% if component.part_type == 'Connection' %>
         <h3><%= component.title %> x <%= amount component.part.scale, 'TL' %></h3>
         <p><%= markdown(component.description.to_s) + ' ' + link_to('Hier geht es zum Rezept', recipe_path(component.part.child.id)) %></p>
       <% else %>
-
         <% unless component.description.to_s.empty? %>
           <h3><%= component.title  %></h3>
           <p><%= markdown(component.description) %></p>
         <% end %>
-
       <% end %>
     <% end %>
   </section>
@@ -71,10 +69,6 @@
     <h3>Quellen</h3>
     <% @recipe.sources.each do |source| %>
       <p><a href='<%= source.url %>'><%= source.title %></a></p>
-      <div class='print'>
-        <span>- <%= source.url %></span>
-        <br />
-      </div>
     <% end %>
   </footer>
 </article>

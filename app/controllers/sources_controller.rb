@@ -66,7 +66,9 @@ class SourcesController < ApplicationController
     @recipes = if @published then Recipe.search(params[:query]).paginate(page: params[:page], per_page: 6).where(public: true).order(title: :asc)
       else  Recipe.search(params[:query]).paginate(page: params[:page], per_page: 6).order(title: :asc)
     end
+
     @last = Recipe.where(public: true).last
+    @cloud = Recipe.where(public: true).shuffle(random: Random.new(Time.now.to_i))[0...1]
 
 #    @recipes = if params.has_key?(:tags) and !params[:tags].empty?
 #      @recipes.order(title: :asc).reject do |recipe|

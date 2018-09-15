@@ -1,5 +1,6 @@
 <%= form_for(recipe) do |form| %>
 <fieldset>
+  <legend><%= t :description %></legend>
 
   <div class="field">
     <%= form.label t(:title) %>
@@ -7,12 +8,13 @@
   </div>
 
   <div class="field">
-    <%= form.label t(:description) %>
+    <%= form.label t(:subtitle) %>
     <%= form.text_area :description, require: true %>
   </div>
 
 </fieldset>
 <fieldset>
+  <legend><%= t :details %></legend>
 
   <div class="field">
     <%= form.label t(:serves) %>
@@ -24,14 +26,18 @@
     <%= form.date_select :last %>
   </div>
 
-  <div class="filed">
-    <%= form.label t(:publish) %>
-    <%= form.check_box :public %>
+  <div class="field">
+    <%= form.label t(:publish) do %>
+      <%= form.check_box :public %>
+      <%= t(:publish) %>
+    <% end %>
   </div>
 
-  <div class="filed">
-    <%= form.label t(:embedded) %>
-    <%= form.check_box :embedded %>
+  <div class="field">
+    <%= form.label t(:embedded) do %>
+      <%= form.check_box :embedded %>
+      <%= t(:embedded) %>
+    <% end %>
   </div>
 
 </fieldset>

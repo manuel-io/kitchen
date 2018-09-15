@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.paginate(page: params[:page], per_page: 48)
+    @products = Product.search(params['query']).paginate(page: params[:page], per_page: 48)
   end
 
   # GET /products/1

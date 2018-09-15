@@ -18,14 +18,21 @@
   </section>
 
   <section>
-    <%= form_tag({controller: 'sources', action: 'list'}, method: 'get') do %>
+     <%= form_tag(method: 'get', name: 'pub') do %>
+        <%= hidden_field_tag 'query', 'exmaple' %>
+       <%= link_to 'Submit', 'javascript: document.pub.submit();' %>
+     <% end %>
+  </section>
+
+  <section>
+    <%= form_tag({controller: 'sources', action: 'list'}, method: 'get', name: 'pub') do %>
       <%= hidden_field_tag 'query', params['query'] %>
-      <table>
-        <tr>
-          <td><%= check_box_tag(:published, 'true', @published) %></td>
-          <td><%= submit_tag('Nur öffentliche Rezepte') %></td>
-        </tr>
-      </table>
+      <div class='field'>
+        <%= label_tag 'Nur öffentliche Rezepte' do %>
+          <%= check_box_tag(:published, 'true', @published) %>
+          <%= link_to 'Zeige öffentliche Rezepte', 'javascript: document.pub.submit();' %>
+        <% end %>
+      </div>
     <% end %>
   </section>
   <!--
@@ -73,13 +80,11 @@
   </section>
 
   <section>
-    <p>
-      Warum hier nur die Quellen zu den eigentlich von mir zubereiteten
-      Rezepten zu finden sind,
-      <a href='https://manuel-io.github.io/blog/2017/06/03/recipes/'>
-        steht hier
-      </a>.
-    </p>
+    <div id='cloud'>
+      <% @cloud.each do |value| %>
+        <%= image_tag picture_recipe_path(value.id), title: value.title %>
+      <% end %>
+    </div>
   </section>
 </aside>
 
@@ -91,7 +96,7 @@
       <%= image_tag picture_recipe_path(@last.id) %>
     </div>
     <div class='description'>
-      <h3 class='recipe'><%= @last.title %></h3></center>
+      <h3><%= @last.title %></h3></center>
       <table>
         <tr>
           <td>
