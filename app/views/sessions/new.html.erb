@@ -6,7 +6,9 @@
     <legend><%= t(:credentials) %></legend>
 
     <div class='field'>
-      <%= form.label :email %>
+      <%= form.label :email do %>
+        <%= t(:email) %>
+      <% end %>
       <%= form.email_field :email, autofocus: true, require: true %>
     </div>
 

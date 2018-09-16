@@ -21,33 +21,37 @@
   <%= form_for [:admin, @user] do |form| %>
 
   <fieldset>
-    <legend>Personalia</legend>
-    <div>
-      <%= form.label :nick %>
+    <legend><%= t(:personalia) %></legend>
+    <div class='field'>
+      <%= form.label t(:nick) %>
       <%= form.text_field :nick, autofocus: true, require: true %>
     </div>
   </fieldset>
 
   <fieldset>
-    <legend>Contact</legend>
-    <div>
-      <%= form.label :email %>
+    <legend><%= t(:contact) %></legend>
+    <div class='field'>
+      <%= form.label t(:email) do %>
+        <%= t(:email) %>
+      <% end %>
       <%= form.email_field :email, placeholder: 'mail@exmaple.com', require: true %>
     </div>
-    <div>
-      <%= form.label :email_confirmation %>
+    <div class='field'>
+      <%= form.label t(:email_confirm) do %>
+        <%= t(:email_confirm) %>
+      <% end %>
       <%= form.email_field :email_confirmation, require: true %>
     </div>
   </fieldset>
 
   <fieldset>
-    <legend>Security</legend>
-    <div>
-      <%= form.label :password %>
+    <legend><%= t(:security) %></legend>
+    <div class='field'>
+      <%= form.label t(:password) %>
       <%= form.password_field :password, placeholder: '********', require: true %>
     </div>
-    <div>
-      <%= form.label :password_confirmation %>
+    <div class='field'>
+      <%= form.label t(:password_confirm) %>
       <%= form.password_field :password_confirmation, require: true %>
     </div>
   </fieldset>

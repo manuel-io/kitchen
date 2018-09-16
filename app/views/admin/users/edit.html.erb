@@ -20,12 +20,16 @@
 
   <%= form_for [:admin, @user], url: update_nick_admin_user_path do |f| %>
   <fieldset>
-    <legend>Personalia</legend>
+    <legend><%= t(:personalia) %></legend>
 
     <div class="field">
-      <%= f.label :nick %>
+      <%= f.label t(:nick) %>
       <%= f.text_field :nick, autofocus: true, require: true %>
     </div>
+
+  </fieldset>
+  <fieldset>
+
     <div class="actions">
       <%= f.submit t(:update_settings) %>
     </div>
@@ -35,16 +39,24 @@
 
   <%= form_for [:admin, @user], url: update_email_admin_user_path do |f| %>
   <fieldset>
-    <legend>Contact</legend>
+    <legend><%= t(:contact) %></legend>
 
     <div class="field">
-      <%= f.label :email %>
+      <%= f.label t(:email) do %>
+        <%= t(:email) %>
+      <% end %>
       <%= f.email_field :email, placeholder: @user.email, require: true %>
     </div>
     <div class="field">
-      <%= f.label :email_confirmation %>
+      <%= f.label t(:email_confirm) do %>
+        <%= t(:email_confirm) %>
+      <% end %>
       <%= f.email_field :email_confirmation, require: true %>
     </div>
+
+  </fieldset>
+  <fieldset>
+
     <div class="actions">
       <%= f.submit t(:update_email) %>
     </div>
@@ -54,16 +66,20 @@
 
   <%= form_for [:admin, @user], url: update_password_admin_user_path  do |f| %>
   <fieldset>
-    <legend>Security</legend>
+    <legend><%= t(:security) %></legend>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label t(:password) %>
       <%= f.password_field :password, placeholder: '********', require: true %>
     </div>
     <div class="field">
-      <%= f.label :password_confirmation %>
+      <%= f.label t(:password_confirm) %>
       <%= f.password_field :password_confirmation, require: true %>
     </div>
+
+  </fieldset>
+  <fieldset>
+
     <div class="actions">
       <%= f.submit t(:update_password) %>
     </div>

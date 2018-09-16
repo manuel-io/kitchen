@@ -6,13 +6,16 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless signed_in?
-      redirect_to list_sources_path
+      return redirect_to list_sources_path
     end
   end
   
   def require_admin
     unless signed_in?
-      redirect_to list_sources_path
+      return redirect_to list_sources_path
+    end
+    unless current_user.admin?
+      return redirect_to user_root_path
     end
   end
 

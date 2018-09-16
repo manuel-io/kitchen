@@ -44,4 +44,9 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+  
+  def is_admin?
+    return false unless signed_in?
+    current_user.admin?
+  end
 end

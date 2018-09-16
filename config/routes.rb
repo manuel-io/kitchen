@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     get :logout
   end
 
+  namespace :user do
+    resources :users, only: [:show] do
+    end
+    root 'overview#index'
+  end
+
   namespace :admin do
     resources :users, only: [:new, :create, :edit, :destroy] do
       patch :update_nick, on: :member

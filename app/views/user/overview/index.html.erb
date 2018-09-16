@@ -1,0 +1,42 @@
+<nav>
+  <%= link_to t(:food_diary), user_root_path %>
+  <%= link_to t(:settings), user_root_path %>
+  <%= link_to t(:credentials), user_root_path %>
+</nav>
+
+<aside>
+  <% if notice %>
+  <section class='notice'>
+    <p id="notice"><%= notice %></p>
+  </section>
+  <% end %>
+
+  <% if alert %>
+  <section class='alert'>
+    <p id='alert'><%= alert %></p>
+  </section>
+  <% end %>
+</aside>
+
+<article>
+  <h2><%= t :users %></h2>
+  <section>
+    <h3><%= t(:hello) %> <%= @user.nick %>,</h3>
+    <p>hier kannst du nach Rezepten suchen, für die du Lebensmittel in deinem Haushalt vorrätig hast:</p> 
+  </section>
+
+  <section>
+    <%= form_tag recipes_path, method: :get, name: 'notepad' do %>
+    <div id='notepad'>
+      <div id='list'>
+        <p>Lebensmittel hier in die Liste eintragen</p>
+      </div>
+      <div class='action'>
+        <input type='hidden' name='query'>
+        <input id='input' autocomplete='off' type='text' placeholder='Zutat eintragen und mit Enter bestätigen'>
+      </div>
+    </div>
+    <%= submit_tag t(:search), name: nil %>
+    <% end %>
+  </section>
+</article>
