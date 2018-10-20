@@ -257,6 +257,34 @@ body > footer {
       }
     }
 
+    .info {
+      grid-area: info;
+      padding: 10px;
+      text-align: center;
+    
+      p {
+        display: inline;
+        text-align: center;
+      }
+
+      p + p {
+        &:before {
+          padding: 0 10px 0 10px;
+          content: '·';
+        }
+      }
+
+      p:last-child {
+        display: block;
+        padding: 5px 0 5px 0;
+
+        &:before {
+          padding: 0;
+          content: '';
+        }
+      }
+    }
+
     .image {
       grid-area: image;
       display: flex;
@@ -349,6 +377,13 @@ body > footer {
     border: 1px solid #e2e2e2;
     border-radius: 3px;
     padding: 10px;
+
+    div.markdown {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e2e2e2;
+      border-radius: 3px;
+    }
  
     p {
       margin: 10px 0 10px 0;
@@ -592,8 +627,8 @@ form[name='notepad'] {
     header {
       display: grid;
       grid-template-columns: 430px;
-      grid-template-rows: auto auto;
-      grid-template-areas: "image" "description";
+      grid-template-rows: auto;
+      grid-template-areas: "image" "description" "info";
     }
   }
 
@@ -638,8 +673,8 @@ form[name='notepad'] {
     header {
       display: grid;
       grid-template-columns: 200px 300px;
-      grid-template-rows: auto;
-      grid-template-areas: "image description";
+      grid-template-rows: auto auto;
+      grid-template-areas: "image description" "info info";
     }
   }
 

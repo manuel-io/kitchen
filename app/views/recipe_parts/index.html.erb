@@ -8,6 +8,14 @@
     <p id="notice"><%= notice %></p>
   </section>
   <% end %>
+
+  <section class='cloud'>
+    <div class='cloud'>
+      <% @recipes.shuffle(random: Random.new(Time.now.to_i))[0...4].each do |value| %>
+        <%= image_tag picture_recipe_path(value.id), title: value.title %>
+      <% end %>
+    </div>
+  </section>
 </aside>
 
 <article>
@@ -18,17 +26,19 @@
       <%= image_tag picture_recipe_path(@last.id) %>
     </div>
     <div class='description'>
-      <h3><%= @last.title %></h3></center>
-      <table>
-        <tr>
-          <td><%= link_to t(:show), recipe_path(@last) %></td>
-          <td><%= link_to t(:edit), edit_recipe_path(@last) %></td>
-          <td><%= link_to t(:destroy), @last, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      </table>
-      <p><%= @last.description %></p>
-      <p><strong><%= t(:price) + ' ' + t(:per_serving) %>:</strong> <%= number_to_currency @last.price_per_serving %></p>
-      <p><strong><%= t(:price) + ' ' + t(:in_total) %>:</strong> <%= number_to_currency @last.total %></p>
+      <div>
+        <h3><%= @last.title %></h3>
+        <table>
+          <tr>
+            <td><%= link_to t(:show), recipe_path(@last) %></td>
+            <td><%= link_to t(:edit), edit_recipe_path(@last) %></td>
+            <td><%= link_to t(:destroy), @last, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        </table>
+        <p><%= @last.description %></p>
+        <p><strong><%= t(:price) + ' ' + t(:per_serving) %>:</strong> <%= number_to_currency @last.price_per_serving %></p>
+        <p><strong><%= t(:price) + ' ' + t(:in_total) %>:</strong> <%= number_to_currency @last.total %></p>
+      </div>
     </div>
   </header>
 
