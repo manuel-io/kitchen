@@ -12,5 +12,6 @@ module Cooking
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     # config.i18n.default_locale = :de
+    config.title = 'Manuels Rezepte'
   end
 end

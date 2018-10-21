@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 
 class SourcesController < ApplicationController
-  before_action :require_login, except: [ :list ]
+  before_action :require_login, except: [ :list, :feed ]
   rescue_from ActionController::UnknownFormat, with: :raise_not_found
   before_action :set_source, only: [:show, :edit, :update, :destroy]
 
@@ -55,6 +55,11 @@ class SourcesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to sources_url, notice: 'Source was successfully destroyed.' }
     end
+  end
+
+  def feed
+    @recipes = Recipe.search(params[:query]).where(public: true).order(updated_at: :desc).limit(10)
+    render content_type: 'text/plain'
   end
 
   def list

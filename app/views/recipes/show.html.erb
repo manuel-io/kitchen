@@ -1,6 +1,8 @@
 <nav>
-  <%= link_to t(:index), recipes_path(query: @recipe.title[0], anchor: @recipe.id) %>
-  <%= link_to t(:edit), edit_recipe_path(@recipe) %>
+  <% if signed_in? %>
+    <%= link_to t(:index), recipes_path(query: @recipe.title[0], anchor: @recipe.id) %>
+    <%= link_to t(:edit), edit_recipe_path(@recipe) %>
+  <% end %>
 </nav>
 
 <aside>

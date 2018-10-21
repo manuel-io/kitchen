@@ -1,7 +1,7 @@
 require 'mini_magick'
 
 class RecipesController < ApplicationController
-  before_action :require_login, except: [:embedded, :picture]
+  before_action :require_login, except: [:show, :embedded, :picture]
   before_action :set_recipe, only: [:show, :embedded, :picture, :edit, :update, :destroy]
 
   # GET /recipes
@@ -16,6 +16,11 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
+    if signed_in? or @recipe.public?
+      render layout: true
+    else
+      redirect_to root_path
+    end
   end
 
   def embedded

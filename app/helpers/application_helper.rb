@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def global_title
+    Cooking::Application.config.title
+  end
+
   def amount(val, unit)
     case unit
       when 'EL', 'TL'

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'sources#list'
+    get '/feed', to: redirect('/sources/feed.atom', status: 302)
 
   resources :vegetables, except: [:show]
   resources :products
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :sources, except: [:show] do
     get 'list', on: :collection
+    get 'feed', on: :collection
   end
 
   resources :connections, only: [:show, :edit, :update]
