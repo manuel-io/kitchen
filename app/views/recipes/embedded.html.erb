@@ -31,9 +31,10 @@
             <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
               <% if component.part_type == 'Connection' %>
                 <h3><%= component.title %> x <%= amount component.part.scale, 'TL' %></h3>
-                <% if @recipe.embedded? %>
+                <% if component.description.size > 0 %><p><%= component.description %></p><% end %>
+                <% if component.part.child.embedded? %>
                   <%= render 'level', recipe: component.part.child %>
-                <% elsif signed_in? or component.part.child.public? %>
+                <% elsif component.part.child.public? %>
                   <p><%= link_to(t(:click), { action: 'embedded', controller: 'recipes', id: component.part.child.id, only_path: false }, { target: '_blank' }) %></p>
                 <% else %>
                   <p>Selber machen oder kaufen.</p>
