@@ -235,6 +235,12 @@ body > footer {
         width: calc(100% - 2px);
       }
     }
+    textarea {
+      box-sizing: border-box;
+      width: 100%;
+      resize: vertical;
+      height: 120px;
+    }
   }
 }
 
