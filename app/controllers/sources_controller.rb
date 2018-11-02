@@ -58,7 +58,7 @@ class SourcesController < ApplicationController
   end
 
   def feed
-    @recipes = Recipe.where(public: true).order(created_at: :desc).limit(10)
+    @recipes = Recipe.where(public: true).order(updated_at: :desc).limit(10)
     render content_type: 'text/plain'
   end
 
