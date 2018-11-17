@@ -58,7 +58,7 @@ class SourcesController < ApplicationController
   end
 
   def feed
-    @recipes = Recipe.where(public: true).order(updated_at: :desc).limit(10)
+    @recipes = Recipe.where(public: true).order(last: :desc).limit(10)
     render content_type: 'text/plain'
   end
 
@@ -72,7 +72,7 @@ class SourcesController < ApplicationController
       else  Recipe.search(params[:query]).paginate(page: params[:page], per_page: 6).order(title: :asc)
     end
 
-    @last = Recipe.where(public: true).order(updated_at: :desc).limit(1).last
+    @last = Recipe.where(public: true).order(last: :desc).limit(1).last
     @cloud = Recipe.where(public: true).shuffle(random: Random.new(Time.now.to_i))[0...1]
 
 #    @recipes = if params.has_key?(:tags) and !params[:tags].empty?
@@ -93,6 +93,11 @@ class SourcesController < ApplicationController
       format.markdown { render content_type: 'text/plain' }
       format.plain { render content_type: 'text/plain' }
     end
+  end
+
+  def book
+    @recipes = Recipe.where(public: true).order(last: :desc).limit(10)
+    render layout: false
   end
 
   def raise_not_found

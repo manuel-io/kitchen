@@ -1,0 +1,146 @@
+<!Doctype html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      html {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      body  {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        min-height: 100%;
+        margin: 0px;
+        padding: 0px;
+        background-image: url("/assets/tile.png");
+        background-repeat: repeat;
+      }
+
+      header {
+        height: 60px;
+        margin: 0px;
+      }
+
+      footer {
+        height: 60px;
+        margin: 0px;
+      }
+
+      article {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0px;
+        padding: 10px 0 10px 0;
+        background-color: #fff;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        width: 100%;
+      }
+
+      main {
+        width: 100%;
+        background-color: #fff;
+        overflow: hidden;
+      }
+       
+      #pages {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        overflow-x: hidden;
+        white-space: nowrap;
+      }
+
+      #pages section {
+        display: inline-block;
+        height: 100%;
+      }
+
+      main fieldset legend { font-weight: bold; padding-left: 5px; padding-right: 5px; }
+      main #description { border-bottom: 1px solid #000; padding: 5px; }
+      main #image { vertical-align: top; }
+      main #amount { text-align: right; padding-right: 2px; }
+      main img.image { width: 300px; }
+      main table { padding: 5px; }
+      main p { padding: 5px; }
+      main .level {
+        border: 1px solid #f0f0f0;
+        background-color: #fbfbfb;
+        margin: 10px;
+      }
+
+      .preview
+      {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        align-content: center;
+        height: 100%;
+      }
+
+      .preview table {
+        height: 100%;
+      }
+
+      .preview img {
+        border-radius: 30px;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      aside {
+        padding: 20px;
+      }
+
+      aside i {
+        font-style: normal;
+        cursor: pointer;
+      }
+    </style>
+  <head>
+  <body>
+  
+  <header>
+  </header>
+  <% @recipe = @recipes[0] %>
+  <article>
+    <aside><i id='left'>(&lt;)</i></aside>
+    <main id="book">
+      <div id="pages">
+        <% @recipes.each_with_index do |recipe, index| %>
+        <section id='page-<%= index %>'>
+
+          <div class='preview'>
+            <table>
+              <tr>
+                <td><%= recipe.title %></td>
+                <td style='text-align:right'>Seite <%= index + 1 %></td>
+              </tr>
+              <tr>
+                <td colspan='2' style='text-align:center;'>
+                  <div style='width: 250px;height: 250px;border: 1px solid #000;background-image: url(<%= picture_recipe_path(recipe.id)%>);background-size: cover;'></div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan='2' style='text-align:center;'>Mehr anzeigen</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+        <% end %>
+      </div>
+    </main>
+    <aside><i id="right">(&gt;)</i></aside>
+  </article>
+  <footer>
+  </footer>
+</body>

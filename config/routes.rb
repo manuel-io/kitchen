@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :recipe_parts, except: [:show]
 
   resources :sources, except: [:show] do
+    get 'book', on: :collection
     get 'list', on: :collection
     get 'feed', on: :collection
   end
