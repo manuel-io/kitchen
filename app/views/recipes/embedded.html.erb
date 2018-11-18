@@ -31,7 +31,7 @@
             <% @recipe.recipe_parts.order(title: :asc).each do |component| %>
               <% if component.part_type == 'Connection' %>
                 <h3><%= component.title %> x <%= amount component.part.scale, 'TL' %></h3>
-                <% if component.description.size > 0 %><p><%= component.description %></p><% end %>
+                <% if component.description.to_s.size > 0 %><p><%= component.description %></p><% end %>
                 <% if component.part.child.embedded? %>
                   <%= render 'level', recipe: component.part.child %>
                 <% elsif component.part.child.public? %>
