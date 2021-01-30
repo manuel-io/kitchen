@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'redcarpet'
+gem 'redcarpet', '~> 3.5.1'
 gem 'mini_magick'
 gem 'oath'
 gem 'oath-generators'
