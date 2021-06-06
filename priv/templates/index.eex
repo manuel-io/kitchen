@@ -1,0 +1,341 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KitchenLog</title>
+
+    <style>
+      @font-face {
+        font-family: 'Fantasque Sans Mono';
+        url('/static/fonts/FantasqueSansMono-Regular.otf') format('otf');
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-width: 320px;
+        height: 100%;
+        min-height: 320px;
+        background-color: #fff;
+        color: #000;
+        font-family: 'Fantasque Sans Mono';
+        font-size: 1em;
+      }
+
+      body {
+        position: relative;
+      }
+
+      body > aside#dish {
+        position: fixed;
+        top: -20px;
+        left: -80px;
+        z-index: 2;
+        margin: 10px;
+        width: 250px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      body > #banner {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 4;
+        margin: 10px;
+        width: 80px;
+        text-align: center;
+        cursor: pointer;
+      }
+      
+      body > #up {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 4;
+        margin: 10px;
+        width: 80px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      body > header {
+        position: fixed;
+        top: 0;
+        z-index: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        height: 50px;
+        background-color: #fff;
+        overflow: hidden;
+        border-bottom: 1px solid #000;
+      }
+
+      body > header h1 {
+        font-size: 1.5em;
+        margin: 0 10px 0 10px;
+        line-height: 50px;
+      }
+
+      body > aside#background {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://vkitchen.herokuapp.com/assets/tile.png');
+      }
+      
+      body > main {
+        position: absolute;
+        top: 50px;
+        z-index: 2;
+        background-color: transparent;
+      }
+      
+      body > main > nav {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 100px;
+        background-color: #fff;
+        border: 1px solid #000;
+        box-sizing: border-box;
+        padding: 40px;
+      }
+      
+      body > main > article {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 100px;
+        background-color: #fff;
+        background-color: #fff;
+        border: 1px solid #000;
+        box-sizing: border-box;
+        padding: 40px;
+      }
+      
+      body > main > nav {
+      }
+
+      img {
+        width: 200px;
+      }
+
+      form button[type=submit]:disabled > span:first-child,
+      form button[type=submit]:not(:disabled) > span:last-child {
+        display: none;
+      }
+
+      form button[type=submit]:not(:disabled) > span:first-child {
+        display: block;
+      }
+
+      @media (min-width: 992px) {
+        body {
+          max-width: 830px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        body > main > nav {
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+        
+        body > main > article {
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="banner" onclick="alert('About');">
+      <img style="width:100%;" src="/static/icons/oneway.png" alt="Vegan Food">
+    </div>
+
+    <div id="up" onclick="window.scrollTo(0, 0);">
+      <img style="width:50%;" src="/static/icons/arrow-circle-top.svg" alt="Up">
+    </div>
+
+    <header>
+      <h1>KitchenLog</h1>
+    </header>
+    
+    <aside id="dish">
+      <img style="width:100%;" src="/static/icons/dish.png" alt="Dish">
+    </aside>
+
+    <aside id="background">
+    </aside>
+
+    <main>
+      <nav>
+        <button>Blog</button>
+        <button>Rezepte</button>
+      </nav>
+      <article>
+        <form action="/image" method="post" onsubmit="add_image(event);">
+          <input type="hidden" value="<%= csrf_token %>" name="_csrf_token">
+          <input type="file" name="image" accept="image/png,image/jpeg" capture multiple required>
+          <button type="submit" name="submit">
+            <span> + </span>
+            <span>...</span>
+          </button>
+          <div id="foo"></div>
+        </form>
+        <p>
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        </p>
+        <p>
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        </p>
+        <p>
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        </p>
+        <p>
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        </p>
+        <p>
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
+        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
+        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
+        </p>
+      </article>
+    </main>
+  </body>
+
+  <script>
+    let add_image = (e) => {
+      e.preventDefault();
+      let files = [];
+      let form = e.target;
+      let csrf_token = form._csrf_token.value;
+
+      form.submit.disabled = true;
+
+      [...form.image.files].forEach((file, index) => {
+        let data = new FormData();
+        data.append('image', file);
+
+        console.log(`${index + 1}/${form.image.files.length}`);
+        console.log(file.name);
+        console.log(file.type);
+        console.log(file.size);
+
+        files.push(new Promise((resolve, reject) => {
+
+          if (file.size > 5242880) {
+            return reject({ 'id': index, 'error': true, 'message': file.name + ' is oversized'});
+          }
+
+          fetch(form.action, { method: form.method
+                             , body: data
+                             , headers: { 'x-csrf-token': csrf_token }
+                             }).then(response => {
+
+                               if (!response.ok) {
+                                 throw Error(response.text());
+                               } else {
+                                 return response.text();
+                               }
+
+                             }).then(data => resolve(data)).catch(data => reject(false));
+        }));
+      });
+        Promise.all(files).then(data => {
+          let foo = document.getElementById('foo');
+          data.forEach((b64) => {
+            let img = new Image();
+            img.src = b64;
+            foo.appendChild(img);
+          });
+          console.log('uploads');
+          form.reset();
+          form.submit.disabled = false;
+        }).catch(data => {
+          console.log(data);
+          form.submit.disabled = false;
+        });
+    };
+  </script>
+</html>
