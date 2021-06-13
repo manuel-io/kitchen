@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :kitchenlog, cowboy_port: 6000
+config :kitchenlog, cowboy_port: 9000
 config :kitchenlog, cowboy_interface: { 127, 0, 0, 1 }
 
 config :kitchenlog, KitchenLog.Repo,

@@ -1,5 +1,7 @@
 defmodule KitchenLog.Router do
   use Plug.Router
+  use Plug.ErrorHandler
+  # alias KitchenLog.Plug.Verify
 
   plug :put_secret_key_base
   plug Plug.Session, store: :cookie,
@@ -12,6 +14,7 @@ defmodule KitchenLog.Router do
 
   plug Plug.Static, at: "/static", from: "#{:code.priv_dir(:kitchenlog)}/static"
   plug Plug.Parsers, parsers: [:urlencoded, :multipart]
+  plug KitchenLog.Plug.Verify, fields: ["image"], size: 5242880, types: ["image/jpeg", "image/png"]
   plug :match
   plug :dispatch
 
@@ -24,10 +27,8 @@ defmodule KitchenLog.Router do
 
   post "/image" do
     # IO.puts inspect KitchenLog.Repo.query("SELECT id FROM minicloud_multimedia LIMIT 1", [])
-    # %{size: size} = File.stat! conn.body_params["image"].path
-    # IO.puts size
-    {:ok, content} = File.read(conn.body_params["image"].path)
-    content_type = conn.body_params["image"].content_type
+    {:ok, content} = File.read(conn.params["image"].path)
+    content_type = conn.params["image"].content_type
     send_resp(conn, 200, "data:#{content_type};base64,#{Base.encode64(content)}")
   end
 
@@ -41,5 +42,12 @@ defmodule KitchenLog.Router do
 
   defp put_csrf_token_in_session(conn, _) do
     conn |> put_session("_csrf_token", Plug.CSRFProtection.get_csrf_token)
+  end
+
+  defp handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do
+    IO.inspect(kind, label: :kind)
+    IO.inspect(reason, label: :reason)
+    IO.inspect(stack, label: :stack)
+    send_resp(conn, conn.status, "Something went wrong")
   end
 end
