@@ -1,0 +1,19 @@
+<section>
+  <h1>Title</h1>
+</section>
+
+<section>
+  <form action="/recipe/1/image" method="post" onsubmit="add_image(event);">
+    <label class="upload">
+      <input type="file" name="image" accept="image/png,image/jpeg" capture multiple required>
+      <span class="upload-custom">
+        <p>Choose a file</p>
+        <button type="submit" name="submit">
+          <span> + </span>
+          <span>...</span>
+        </button>
+      </span>
+    </label>
+    <div id="foo"></div>
+  </form>
+</section>

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="<%= csrf_token %>">
     <title>KitchenLog</title>
 
     <style>
@@ -22,6 +23,7 @@
         color: #000;
         font-family: 'Fantasque Sans Mono';
         font-size: 1em;
+        overflow-x: hidden;
       }
 
       body {
@@ -49,7 +51,7 @@
         text-align: center;
         cursor: pointer;
       }
-      
+
       body > #up {
         position: fixed;
         bottom: 0;
@@ -90,14 +92,15 @@
         height: 100%;
         background-image: url('https://vkitchen.herokuapp.com/assets/tile.png');
       }
-      
+
       body > main {
         position: absolute;
         top: 50px;
         z-index: 2;
+        width: 100%;
         background-color: transparent;
       }
-      
+
       body > main > nav {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -107,7 +110,7 @@
         box-sizing: border-box;
         padding: 40px;
       }
-      
+
       body > main > article {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -118,8 +121,64 @@
         box-sizing: border-box;
         padding: 40px;
       }
-      
+
+      @keyframes slideout {
+        0% {
+          border: 1px solid #000;
+          box-shadow: 2px 2px 5px 2px #fff;
+          transform: translateX(0px);
+        }
+        25%  {
+          border: 1px solid #000;
+          box-shadow: 2px 2px 5px 2px #000;
+          transform: translateX(0px);
+        }
+        50%  {
+          border: 1px solid #000;
+          box-shadow: 2px 2px 5px 2px #000;
+          transform: translateX(-1200px);
+        }
+        100% {
+          border: 1px solid #000;
+          box-shadow: 2px 2px 5px 2px #000;
+          transform: translateX(-1200px);
+        }
+      }
+
+      body > main > article > div {
+        box-sizing: border-box;
+        background-color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 2px 2px 5px 2px #fff;
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      body > main > article > div:not(.active) {
+        border: 1px solid #000;
+        box-shadow: 2px 2px 5px 2px #000;
+        transform: translateX(-1200px);
+        animation-name: slideout;
+        animation-duration: 5s;
+      }
+
+      body > main > article > section.active {
+        position: relative;
+        z-index: 300;
+        transform: translateX(0px);
+      }
+
       body > main > nav {
+      }
+
+      form {
+        display: inline;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
       }
 
       img {
@@ -146,11 +205,37 @@
           margin-left: 0px;
           margin-right: 0px;
         }
-        
+
         body > main > article {
           margin-left: 0px;
           margin-right: 0px;
         }
+      }
+
+      label.upload {
+        position: relative;
+        display: inline-block;
+        height: 50px;
+        width: 250px;
+        border: 1px solid #000;
+      }
+
+      label.upload > input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+
+      span.upload-custom {
+        position: absolute;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -167,7 +252,7 @@
     <header>
       <h1>KitchenLog</h1>
     </header>
-    
+
     <aside id="dish">
       <img style="width:100%;" src="/static/icons/dish.png" alt="Dish">
     </aside>
@@ -181,115 +266,48 @@
         <button>Rezepte</button>
       </nav>
       <article>
-        <form action="/image" method="post" onsubmit="add_image(event);">
-          <input type="hidden" value="<%= csrf_token %>" name="_csrf_token">
-          <input type="file" name="image" accept="image/png,image/jpeg" capture multiple required>
-          <button type="submit" name="submit">
-            <span> + </span>
-            <span>...</span>
-          </button>
-          <div id="foo"></div>
-        </form>
-        <p>
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        </p>
-        <p>
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        </p>
-        <p>
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        </p>
-        <p>
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        </p>
-        <p>
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas f
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas fd
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsadds d
-        sadsad sadsa ds sadsa sdss dsdeq lsdksldl we1d lö qw2 e ee er ds sadas d
-        dsad ada dqds dwqee q wqewq wewe1 wqeww1ee3 3212 wq12 sa as dsa dsad d
-        </p>
+        <div class="active">
+          <section>
+            <h1>Willkommen im KitchenLog</h1>
+          </section>
+        </div>
       </article>
     </main>
   </body>
 
   <script>
+    let open = (form) => {
+      document.querySelector('article > div').classList.remove('active');
+      fetch(form.action, { method: form.method
+                         , headers: { 'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content }
+                         }).then(response => {
+
+        if (!response.ok) {
+          throw Error(response.text());
+        } else {
+          return response.text();
+        }
+
+        }).then(data => {
+          window.setTimeout((e) => {
+            document.querySelector('article > div').classList.add('active');
+            document.querySelector('article > div').innerHTML = data
+          }, 2000);
+        }).catch(data => console.log(data));
+    }
+
+    let load = (e) => {
+      e.preventDefault();
+      let form = e.target;
+      form.submit.disabled = true;
+      open(form);
+    }
+
     let add_image = (e) => {
       e.preventDefault();
       let files = [];
       let form = e.target;
-      let csrf_token = form._csrf_token.value;
+      let csrf_token = document.head.querySelector('meta[name=csrf-token]').content;
 
       form.submit.disabled = true;
 
@@ -310,7 +328,7 @@
 
           fetch(form.action, { method: form.method
                              , body: data
-                             , headers: { 'x-csrf-token': csrf_token }
+                             , headers: { 'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content }
                              }).then(response => {
 
                                if (!response.ok) {
@@ -336,6 +354,15 @@
           console.log(data);
           form.submit.disabled = false;
         });
+    };
+
+    window.onload = (e) => {
+      console.log(document.head.querySelector('meta[name=csrf-token]').content);
+      let form = new FormData();
+      form.method = 'get';
+      form.action = '<%= target %>';
+      alert(form.action);
+      open(form);
     };
   </script>
 </html>

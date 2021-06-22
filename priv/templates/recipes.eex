@@ -1,0 +1,11 @@
+<section>
+  <h1>Dashboard</h1>
+</section>
+
+<section>
+  <%= for recipe <- recipes do %>
+    <form action="/recipe/<%= recipe["id"] %>" method="get" onsubmit="load(event);">
+      <button type="submit" name="submit"><%= recipe["title"] %></button>
+    </form
+  <% end %>
+</section>
