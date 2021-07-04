@@ -1,4 +1,6 @@
 defmodule KitchenLog.Plug.Verify do
+  import Plug.Conn
+
   defmodule OutOfContext do
     defexception message: "OutOfContext", plug_status: 400
   end
@@ -19,8 +21,10 @@ defmodule KitchenLog.Plug.Verify do
     options
   end
 
-  def call(%Plug.Conn{request_path: path, method: method} = conn, opts) do
-    state = Plug.CSRFProtection.dump_state()
+  def call(%{request_path: path, method: method} = conn, opts) do
+    session = get_session(conn, "_csrf_token")
+    state = Plug.CSRFProtection.dump_state_from_session(session)
+
     {_, token} = Enum.find(conn.req_headers, {"", ""}, fn(element) ->
       case element do
         {"x-csrf-token", _} -> true
@@ -33,8 +37,10 @@ defmodule KitchenLog.Plug.Verify do
         |> validate(%{ fields: ["image"] })
         |> validate(%{ name: "image", upload_size: 5242880 })
         |> validate(%{ name: "image", file_types: ["image/jpeg", "image/png"] })
+      {"POST", [_]} -> conn |> validate(conn.assigns)
       {"GET", []} -> conn
-      _ -> conn |> validate(%{state: state, token: token}) |> validate(conn.assigns)
+      #_ -> conn |> validate(%{state: state, token: token}) |> validate(conn.assigns)
+      _ -> conn
     end
   end
 

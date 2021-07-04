@@ -35,6 +35,8 @@ defmodule KitchenLog.MixProject do
       {:ecto_sql, "~> 3.6.2"},
       {:entropy_string, "~> 1.3"},
       {:mix_systemd, "~> 0.7"},
+      {:poison, "~> 3.1"},
+      {:bcrypt_elixir, "~> 2.3.0"},
     ]
   end
 end

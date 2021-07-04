@@ -3,13 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="<%= csrf_token %>">
+    <meta name="csrf-token" content="<%= app.csrf_token %>">
     <title>KitchenLog</title>
 
     <style>
       @font-face {
         font-family: 'Fantasque Sans Mono';
         url('/static/fonts/FantasqueSansMono-Regular.otf') format('otf');
+      }
+
+      html, body, input, button, h1, h2, h3, h4, h5, h6, p {
+        font-family: 'Fantasque Sans Mono';
+        margin: 0;
+        padding: 0;
+      }
+
+      form {
+        display: inline;
+        margin: 0;
+        padding: 0;
       }
 
       html, body {
@@ -76,6 +88,7 @@
         background-color: #fff;
         overflow: hidden;
         border-bottom: 1px solid #000;
+        box-shadow: 0px 5px 10px 5px #333;
       }
 
       body > header h1 {
@@ -105,21 +118,22 @@
         margin-top: 20px;
         margin-bottom: 20px;
         margin-left: 100px;
+        padding: 5px 20px 10px 20px;
+        box-sizing: border-box;
         background-color: #fff;
         border: 1px solid #000;
-        box-sizing: border-box;
-        padding: 40px;
+        box-shadow: 0px 5px 10px 5px #333;
       }
 
       body > main > article {
         margin-top: 20px;
         margin-bottom: 20px;
         margin-left: 100px;
-        background-color: #fff;
+        padding: 40px;
+        box-sizing: border-box;
         background-color: #fff;
         border: 1px solid #000;
-        box-sizing: border-box;
-        padding: 40px;
+        box-shadow: 0px 5px 10px 5px #333;
       }
 
       @keyframes slideout {
@@ -195,8 +209,8 @@
       }
 
       @media (min-width: 992px) {
-        body {
-          max-width: 830px;
+        body > main {
+          max-width: 992px;
         }
       }
 
@@ -237,7 +251,118 @@
         align-items: center;
         cursor: pointer;
       }
+
+      nav button {
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 40px;
+        box-sizing: border-box;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+
+      div.submenu {
+        box-sizing; border-box;
+        border-radius: 5px;
+      }
+
+      div.submenu > div:not(.active) {
+        display: none;
+      }
+
+      div.submenu > div.active {
+        display: block;
+      }
+
+      fieldset {
+      padding: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid #000;
+      box-shadow: none;
+      appearance: none;
+      }
+
+      fieldset > div:first-child {
+        flex-shrink: 0;
+        flex-grow: 1;
+      }
+
+      fieldset > div:last-child {
+        flex-shrink: 0;
+        flex-grow: 0;
+      }
+
+      fieldset input,
+      fieldset input:invalid,
+      fieldset input:required,
+      fieldset input:focus-visible,
+      fieldset input:focus {
+        font-size: 1.2em;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        appearance: none;
+      }
+
+      fieldset button,
+      fieldset button:focus {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        appearance: none;
+      }
     </style>
+
+    <script>
+      let toogle = (target) => {
+        document.querySelectorAll('div.submenu > div.active').forEach((element) => {
+          element.classList.remove('active');
+        });
+        document.querySelector('div.submenu > div.' + target).classList.add('active');
+
+        let input = document.querySelector('div.submenu > div.active input.focus');
+        if (input) input.focus();
+      };
+
+      let signin = () => {
+        let username = document.forms.username.input.value.trim();
+
+        if (username.length < 6) {
+          toogle('username');
+          return;
+        }
+
+        toogle('password');
+        document.forms.login.username.value = username;
+      }
+
+      let view = (data) => {
+        window.setTimeout((e) => {
+          document.querySelector('article > div').classList.add('active');
+          document.querySelector('article > div').innerHTML = data;
+        }, 2000);
+      };
+
+      let load = (e) => {
+        e.preventDefault();
+        e.target.submit.disabled = true;
+        document.querySelector('article > div').classList.remove('active');
+        window.app.open(e.target.action, e.target.method, new FormData(), view, console.log);
+      };
+    </script>
   </head>
 
   <body>
@@ -262,9 +387,47 @@
 
     <main>
       <nav>
-        <button>Blog</button>
-        <button>Rezepte</button>
+        <div class="menu">
+          <button onclick="event.preventDefault();toogle('recipes');">Recipes</button>
+          <%= unless app.authenticated? do %>
+            <button onclick="event.preventDefault();toogle('username');">Login</button>
+          <% else %>
+            <form action="/logout" method="post">
+              <input type="hidden" name="_csrf_token" value="<%= app.csrf_token %>">
+              <button type="submit">Logout</button>
+            </form>
+          <% end %>
+        </div>
+
+        <div class="submenu">
+          <div class="recipes active">
+            <p><a href="">Inbound</a></p>
+            <p><a href="">Top 10</a></p>
+          </div>
+          <div class="username">
+            <form action="/login" method="post" name="username" onsubmit="event.preventDefault();signin();">
+              <label>Username</label>
+              <fieldset>
+                <div><input class="focus" type="text" name="input" minlength="6" autocomplete="off" autofocus required></div>
+                <div><button type="submit">Confirm</button></div>
+              </fieldset>
+            </form>
+          </div>
+
+          <div class="password">
+            <form action="/login" method="post" name="login">
+              <input type="hidden" name="_csrf_token" value="<%= app.csrf_token %>">
+              <input type="hidden" name="username">
+              <label>Password</label>
+              <fieldset>
+                <div><input class="focus" type="password" name="password" minlength="6" autocomplete="off" required></div>
+                <div><button type="submit">Login</button></div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </nav>
+
       <article>
         <div class="active">
           <section>
@@ -276,38 +439,32 @@
   </body>
 
   <script>
-    let open = (form) => {
-      document.querySelector('article > div').classList.remove('active');
-      fetch(form.action, { method: form.method
-                         , headers: { 'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content }
-                         }).then(response => {
+    let register = (e) => {
+      e.preventDefault();
+      let form = new FormData(e.target);
+      fetch(e.target.action, { 'method': e.target.method
+                             , 'body': form
+                             , 'headers': { 'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content }
+                             }).then(response => {
 
-        if (!response.ok) {
-          throw Error(response.text());
-        } else {
-          return response.text();
-        }
+          if (!response.ok) {
+            throw Error(response.text());
+          } else {
+            return response.json();
+          }
 
         }).then(data => {
-          window.setTimeout((e) => {
-            document.querySelector('article > div').classList.add('active');
-            document.querySelector('article > div').innerHTML = data
-          }, 2000);
+          console.log(data)
         }).catch(data => console.log(data));
-    }
-
-    let load = (e) => {
-      e.preventDefault();
-      let form = e.target;
-      form.submit.disabled = true;
-      open(form);
-    }
+    };
 
     let add_image = (e) => {
       e.preventDefault();
       let files = [];
       let form = e.target;
       let csrf_token = document.head.querySelector('meta[name=csrf-token]').content;
+      console.log('using');
+      console.log(csrf_token);
 
       form.submit.disabled = true;
 
@@ -355,14 +512,16 @@
           form.submit.disabled = false;
         });
     };
+  </script>
+
+  <script type="module">
+    import KitchenLog from '/static/scripts/kitchenlog.js';
+    let csrf_token = document.head.querySelector('meta[name=csrf-token]').content;
+    window.app = new KitchenLog(csrf_token);
 
     window.onload = (e) => {
-      console.log(document.head.querySelector('meta[name=csrf-token]').content);
-      let form = new FormData();
-      form.method = 'get';
-      form.action = '<%= target %>';
-      alert(form.action);
-      open(form);
+      document.querySelector('article > div').classList.remove('active');
+      window.app.open('<%= target %>', 'get', new FormData(), view, console.log);
     };
   </script>
 </html>

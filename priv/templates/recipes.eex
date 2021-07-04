@@ -3,9 +3,20 @@
 </section>
 
 <section>
+  <h3>Recipes</h3>
   <%= for recipe <- recipes do %>
     <form action="/recipe/<%= recipe["id"] %>" method="get" onsubmit="load(event);">
       <button type="submit" name="submit"><%= recipe["title"] %></button>
-    </form
+    </form>
   <% end %>
+</section>
+
+<section>
+  <h3>Register</h3>
+  <form action="/register" method="post" onsubmit="register(event);">
+    <input type="email" name="email" required>
+    <input type="text" name="username" required>
+    <input type="password" name="password" required>
+    <input type="submit" name="submit" value="Submit">
+  </form>
 </section>
